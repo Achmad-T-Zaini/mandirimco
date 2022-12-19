@@ -1,0 +1,535 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <!-- Add you code here -->
+
+        
+        <record id="ins_account_financial_report_balancesheet0" model="ins.account.financial.report">
+            <field name="name">BALANCE SHEET</field>
+            <field name="type">sum</field>
+            <!-- <field name="parent_id" ref="akun_622" /> -->
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_624" model="ins.account.financial.report">
+            <field name="name">AKTIVA</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="ins_account_financial_report_balancesheet0" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_625" model="ins.account.financial.report">
+            <field name="name">CURRENT ASSET</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_624" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_626" model="ins.account.financial.report">
+            <field name="name">KAS DAN BANK</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_627" model="ins.account.financial.report">
+            <field name="name">CASH ON HAND</field>
+            <field name="parent_id" ref="akun_626" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_100001'),ref('l10n_id_gdsk.1_chart_100002'),ref('l10n_id_gdsk.1_chart_100003'),ref('l10n_id_gdsk.1_chart_100004'),ref('l10n_id_gdsk.1_chart_100005'),ref('l10n_id_gdsk.1_chart_100006'),ref('l10n_id_gdsk.1_chart_100007'),ref('l10n_id_gdsk.1_chart_100008'),ref('l10n_id_gdsk.1_chart_100009'),ref('l10n_id_gdsk.1_chart_100010'),ref('l10n_id_gdsk.1_chart_100011'),ref('l10n_id_gdsk.1_chart_100012'),ref('l10n_id_gdsk.1_chart_100013'),ref('l10n_id_gdsk.1_chart_100014'),ref('l10n_id_gdsk.1_chart_100015'),ref('l10n_id_gdsk.1_chart_100016'),ref('l10n_id_gdsk.1_chart_100017'),ref('l10n_id_gdsk.1_chart_100018'),ref('l10n_id_gdsk.1_chart_100019'),ref('l10n_id_gdsk.1_chart_100020'),ref('l10n_id_gdsk.1_chart_100021'),ref('l10n_id_gdsk.1_chart_100022'),ref('l10n_id_gdsk.1_chart_100023'),ref('l10n_id_gdsk.1_chart_100024'),ref('l10n_id_gdsk.1_chart_100025'),ref('l10n_id_gdsk.1_chart_100026'),ref('l10n_id_gdsk.1_chart_100027'),ref('l10n_id_gdsk.1_chart_100028'),ref('l10n_id_gdsk.1_chart_100029'),ref('l10n_id_gdsk.1_chart_100030'),ref('l10n_id_gdsk.1_chart_100031'),ref('l10n_id_gdsk.1_chart_100032'),ref('l10n_id_gdsk.1_chart_100033'),ref('l10n_id_gdsk.1_chart_100034'),ref('l10n_id_gdsk.1_chart_100035'),ref('l10n_id_gdsk.1_chart_100036'),ref('l10n_id_gdsk.1_chart_100037'),ref('l10n_id_gdsk.1_chart_100038'),ref('l10n_id_gdsk.1_chart_100039'),ref('l10n_id_gdsk.1_chart_100040'),ref('l10n_id_gdsk.1_chart_100041'),ref('l10n_id_gdsk.1_chart_100042'),ref('l10n_id_gdsk.1_chart_100043'),ref('l10n_id_gdsk.1_chart_100044'),ref('l10n_id_gdsk.1_chart_100045'),ref('l10n_id_gdsk.1_chart_100046'),])]" />
+        </record>
+        <record id="akun_674" model="ins.account.financial.report">
+            <field name="name">BANK</field>
+            <field name="parent_id" ref="akun_626" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_110001'),ref('l10n_id_gdsk.1_chart_110002'),ref('l10n_id_gdsk.1_chart_110003'),ref('l10n_id_gdsk.1_chart_110004'),ref('l10n_id_gdsk.1_chart_110005'),ref('l10n_id_gdsk.1_chart_110006'),ref('l10n_id_gdsk.1_chart_110007'),ref('l10n_id_gdsk.1_chart_110008'),ref('l10n_id_gdsk.1_chart_110009'),ref('l10n_id_gdsk.1_chart_110010'),ref('l10n_id_gdsk.1_chart_110011'),ref('l10n_id_gdsk.1_chart_110012'),ref('l10n_id_gdsk.1_chart_110013'),ref('l10n_id_gdsk.1_chart_110014'),ref('l10n_id_gdsk.1_chart_110015'),ref('l10n_id_gdsk.1_chart_110016'),ref('l10n_id_gdsk.1_chart_110017'),ref('l10n_id_gdsk.1_chart_110018'),ref('l10n_id_gdsk.1_chart_110019'),ref('l10n_id_gdsk.1_chart_110020'),ref('l10n_id_gdsk.1_chart_110021'),ref('l10n_id_gdsk.1_chart_110022'),])]" />
+        </record>
+        <record id="akun_697" model="ins.account.financial.report">
+            <field name="name">BANK INTRANSIT</field>
+            <field name="parent_id" ref="akun_626" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_110_BIT'),])]" />
+        </record>
+        <record id="akun_699" model="ins.account.financial.report">
+            <field name="name">CASH ON</field>
+            <field name="parent_id" ref="akun_626" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_110100'),ref('l10n_id_gdsk.1_chart_110101'),ref('l10n_id_gdsk.1_chart_110102'),ref('l10n_id_gdsk.1_chart_110103'),])]" />
+        </record>
+        <record id="akun_704" model="ins.account.financial.report">
+            <field name="name">TIME DEPOSIT</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_120001'),ref('l10n_id_gdsk.1_chart_120002'),ref('l10n_id_gdsk.1_chart_120003'),ref('l10n_id_gdsk.1_chart_120004'),ref('l10n_id_gdsk.1_chart_120005'),])]" />
+        </record>
+        <record id="akun_710" model="ins.account.financial.report">
+            <field name="name">ACCOUNT RECEIVABLE TRADE</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_130'),ref('l10n_id_gdsk.1_chart_130_ARC'),])]" />
+        </record>
+        <record id="akun_713" model="ins.account.financial.report">
+            <field name="name">ALLOWANCE FOR BAD DEBTS </field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_131001'),])]" />
+        </record>
+        <record id="akun_715" model="ins.account.financial.report">
+            <field name="name">INTERCOMPANY RECEIVABLE</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_132001'),ref('l10n_id_gdsk.1_chart_132002'),ref('l10n_id_gdsk.1_chart_132003'),ref('l10n_id_gdsk.1_chart_132004'),ref('l10n_id_gdsk.1_chart_132005'),ref('l10n_id_gdsk.1_chart_132006'),ref('l10n_id_gdsk.1_chart_132007'),])]" />
+        </record>
+        <record id="akun_723" model="ins.account.financial.report">
+            <field name="name">ALLOWANCE FOR BAD DEBTS (INTERCOMPANY RECEIVABLE)</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_133001'),])]" />
+        </record>
+        <record id="akun_725" model="ins.account.financial.report">
+            <field name="name">OTHER RECEIVABLE</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_134001'),ref('l10n_id_gdsk.1_chart_134002'),ref('l10n_id_gdsk.1_chart_134003'),ref('l10n_id_gdsk.1_chart_134004'),ref('l10n_id_gdsk.1_chart_134005'),ref('l10n_id_gdsk.1_chart_134006'),ref('l10n_id_gdsk.1_chart_134007'),])]" />
+        </record>
+        <record id="akun_733" model="ins.account.financial.report">
+            <field name="name">INVENTORY</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_140001'),ref('l10n_id_gdsk.1_chart_140002'),ref('l10n_id_gdsk.1_chart_140003'),ref('l10n_id_gdsk.1_chart_140004'),ref('l10n_id_gdsk.1_chart_140005'),ref('l10n_id_gdsk.1_chart_140006'),ref('l10n_id_gdsk.1_chart_140007'),ref('l10n_id_gdsk.1_chart_140501'),ref('l10n_id_gdsk.1_chart_140_ARC'),ref('l10n_id_gdsk.1_chart_140011'),ref('l10n_id_gdsk.1_chart_140012'),ref('l10n_id_gdsk.1_chart_140013'),])]" />
+        </record>
+        <record id="akun_746" model="ins.account.financial.report">
+            <field name="name">PREPAID ADVANCE</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_150001'),ref('l10n_id_gdsk.1_chart_150002'),ref('l10n_id_gdsk.1_chart_150003'),ref('l10n_id_gdsk.1_chart_150004'),ref('l10n_id_gdsk.1_chart_150011'),ref('l10n_id_gdsk.1_chart_150012'),ref('l10n_id_gdsk.1_chart_150013'),ref('l10n_id_gdsk.1_chart_150014'),ref('l10n_id_gdsk.1_chart_150015'),ref('l10n_id_gdsk.1_chart_150016'),ref('l10n_id_gdsk.1_chart_150017'),])]" />
+        </record>
+        <record id="akun_758" model="ins.account.financial.report">
+            <field name="name">PREPAID TAX</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_151001'),ref('l10n_id_gdsk.1_chart_151002'),ref('l10n_id_gdsk.1_chart_151003'),ref('l10n_id_gdsk.1_chart_151004'),ref('l10n_id_gdsk.1_chart_151005'),ref('l10n_id_gdsk.1_chart_151006'),ref('l10n_id_gdsk.1_chart_151007'),ref('l10n_id_gdsk.1_chart_151008'),])]" />
+        </record>
+        <record id="akun_767" model="ins.account.financial.report">
+            <field name="name">PREPAID EXPENSES</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_152001'),ref('l10n_id_gdsk.1_chart_152002'),ref('l10n_id_gdsk.1_chart_152003'),ref('l10n_id_gdsk.1_chart_152004'),ref('l10n_id_gdsk.1_chart_152005'),ref('l10n_id_gdsk.1_chart_152006'),ref('l10n_id_gdsk.1_chart_152051'),ref('l10n_id_gdsk.1_chart_152052'),ref('l10n_id_gdsk.1_chart_152101'),ref('l10n_id_gdsk.1_chart_152102'),ref('l10n_id_gdsk.1_chart_152103'),ref('l10n_id_gdsk.1_chart_152151'),ref('l10n_id_gdsk.1_chart_152152'),ref('l10n_id_gdsk.1_chart_152153'),ref('l10n_id_gdsk.1_chart_152999'),])]" />
+        </record>
+        <record id="akun_783" model="ins.account.financial.report">
+            <field name="name">INVESTMENT</field>
+            <field name="parent_id" ref="akun_625" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_160001'),ref('l10n_id_gdsk.1_chart_160002'),ref('l10n_id_gdsk.1_chart_160003'),ref('l10n_id_gdsk.1_chart_160004'),])]" />
+        </record>
+        <record id="akun_788" model="ins.account.financial.report">
+            <field name="name">AKTIVA TETAP</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_624" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_789" model="ins.account.financial.report">
+            <field name="name">FIXED ASSET</field>
+            <field name="parent_id" ref="akun_788" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_170001'),ref('l10n_id_gdsk.1_chart_170002'),ref('l10n_id_gdsk.1_chart_170003'),ref('l10n_id_gdsk.1_chart_170004'),ref('l10n_id_gdsk.1_chart_170005'),])]" />
+        </record>
+        <record id="akun_795" model="ins.account.financial.report">
+            <field name="name">ACCUM. DEPRECIATION</field>
+            <field name="parent_id" ref="akun_788" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_180001'),ref('l10n_id_gdsk.1_chart_180002'),ref('l10n_id_gdsk.1_chart_180003'),ref('l10n_id_gdsk.1_chart_180004'),ref('l10n_id_gdsk.1_chart_180005'),])]" />
+        </record>
+        <record id="akun_801" model="ins.account.financial.report">
+            <field name="name">OTHER ASSET</field>
+            <field name="parent_id" ref="akun_788" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_190001'),ref('l10n_id_gdsk.1_chart_190002'),ref('l10n_id_gdsk.1_chart_190003'),ref('l10n_id_gdsk.1_chart_190004'),ref('l10n_id_gdsk.1_chart_190005'),ref('l10n_id_gdsk.1_chart_190006'),ref('l10n_id_gdsk.1_chart_190099'),])]" />
+        </record>
+        <record id="akun_809" model="ins.account.financial.report">
+            <field name="name">ACCUMULATION DEPRECIATION OTHER ASSET</field>
+            <field name="parent_id" ref="akun_788" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_191001'),])]" />
+        </record>
+        <record id="akun_811" model="ins.account.financial.report">
+            <field name="name">HUTANG</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="ins_account_financial_report_balancesheet0" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_812" model="ins.account.financial.report">
+            <field name="name">KEWAJIBAN LANCAR</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_811" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_813" model="ins.account.financial.report">
+            <field name="name">BANK LOAN</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_200001'),ref('l10n_id_gdsk.1_chart_200002'),ref('l10n_id_gdsk.1_chart_200003'),ref('l10n_id_gdsk.1_chart_200004'),])]" />
+        </record>
+        <record id="akun_818" model="ins.account.financial.report">
+            <field name="name">ACCOUNT PAYABLE TRADE / HUTANG USAHA</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_210001'),])]" />
+        </record>
+        <record id="akun_820" model="ins.account.financial.report">
+            <field name="name">A/P CLEARING</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_211001'),])]" />
+        </record>
+        <record id="akun_822" model="ins.account.financial.report">
+            <field name="name">INTERCOMPANY PAYABLE</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_220001'),ref('l10n_id_gdsk.1_chart_220002'),ref('l10n_id_gdsk.1_chart_220003'),ref('l10n_id_gdsk.1_chart_220004'),ref('l10n_id_gdsk.1_chart_220005'),ref('l10n_id_gdsk.1_chart_220006'),ref('l10n_id_gdsk.1_chart_220007'),ref('l10n_id_gdsk.1_chart_220008'),])]" />
+        </record>
+        <record id="akun_831" model="ins.account.financial.report">
+            <field name="name">ACCOUNT PAYABLE LEASING</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_230001'),ref('l10n_id_gdsk.1_chart_230002'),])]" />
+        </record>
+        <record id="akun_834" model="ins.account.financial.report">
+            <field name="name">OTHERS PAYABLE</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_240001'),ref('l10n_id_gdsk.1_chart_240002'),ref('l10n_id_gdsk.1_chart_240003'),ref('l10n_id_gdsk.1_chart_240004'),ref('l10n_id_gdsk.1_chart_240005'),ref('l10n_id_gdsk.1_chart_240006'),ref('l10n_id_gdsk.1_chart_240007'),ref('l10n_id_gdsk.1_chart_240008'),ref('l10n_id_gdsk.1_chart_240009'),ref('l10n_id_gdsk.1_chart_240010'),ref('l10n_id_gdsk.1_chart_240011'),ref('l10n_id_gdsk.1_chart_240012'),ref('l10n_id_gdsk.1_chart_240013'),ref('l10n_id_gdsk.1_chart_240014'),ref('l10n_id_gdsk.1_chart_240015'),ref('l10n_id_gdsk.1_chart_240016'),ref('l10n_id_gdsk.1_chart_240017'),ref('l10n_id_gdsk.1_chart_240018'),ref('l10n_id_gdsk.1_chart_240019'),ref('l10n_id_gdsk.1_chart_240020'),ref('l10n_id_gdsk.1_chart_240021'),ref('l10n_id_gdsk.1_chart_240022'),ref('l10n_id_gdsk.1_chart_240023'),ref('l10n_id_gdsk.1_chart_240024'),ref('l10n_id_gdsk.1_chart_240025'),ref('l10n_id_gdsk.1_chart_240026'),ref('l10n_id_gdsk.1_chart_240027'),ref('l10n_id_gdsk.1_chart_240028'),ref('l10n_id_gdsk.1_chart_240029'),ref('l10n_id_gdsk.1_chart_240030'),ref('l10n_id_gdsk.1_chart_240031'),ref('l10n_id_gdsk.1_chart_240032'),ref('l10n_id_gdsk.1_chart_240033'),ref('l10n_id_gdsk.1_chart_240034'),ref('l10n_id_gdsk.1_chart_240035'),ref('l10n_id_gdsk.1_chart_240036'),ref('l10n_id_gdsk.1_chart_240037'),ref('l10n_id_gdsk.1_chart_240038'),ref('l10n_id_gdsk.1_chart_240039'),ref('l10n_id_gdsk.1_chart_240040'),ref('l10n_id_gdsk.1_chart_240041'),ref('l10n_id_gdsk.1_chart_240042'),ref('l10n_id_gdsk.1_chart_240043'),ref('l10n_id_gdsk.1_chart_240044'),ref('l10n_id_gdsk.1_chart_240045'),ref('l10n_id_gdsk.1_chart_240046'),ref('l10n_id_gdsk.1_chart_240047'),ref('l10n_id_gdsk.1_chart_240048'),ref('l10n_id_gdsk.1_chart_240049'),ref('l10n_id_gdsk.1_chart_240050'),ref('l10n_id_gdsk.1_chart_240051'),ref('l10n_id_gdsk.1_chart_240052'),ref('l10n_id_gdsk.1_chart_240053'),ref('l10n_id_gdsk.1_chart_240054'),ref('l10n_id_gdsk.1_chart_240055'),ref('l10n_id_gdsk.1_chart_240056'),ref('l10n_id_gdsk.1_chart_240057'),ref('l10n_id_gdsk.1_chart_240058'),ref('l10n_id_gdsk.1_chart_240059'),ref('l10n_id_gdsk.1_chart_240060'),ref('l10n_id_gdsk.1_chart_240061'),ref('l10n_id_gdsk.1_chart_240062'),ref('l10n_id_gdsk.1_chart_240063'),ref('l10n_id_gdsk.1_chart_240064'),ref('l10n_id_gdsk.1_chart_240065'),ref('l10n_id_gdsk.1_chart_240250'),])]" />
+        </record>
+        <record id="akun_901" model="ins.account.financial.report">
+            <field name="name">ADVANCE RECEIPT</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_250001'),ref('l10n_id_gdsk.1_chart_250002'),ref('l10n_id_gdsk.1_chart_250003'),])]" />
+        </record>
+        <record id="akun_905" model="ins.account.financial.report">
+            <field name="name">ACCRUED EXPENSES</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_260001'),])]" />
+        </record>
+        <record id="akun_907" model="ins.account.financial.report">
+            <field name="name">ACCURED TAX</field>
+            <field name="parent_id" ref="akun_812" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_270001'),ref('l10n_id_gdsk.1_chart_270002'),ref('l10n_id_gdsk.1_chart_270003'),ref('l10n_id_gdsk.1_chart_270004'),ref('l10n_id_gdsk.1_chart_270005'),ref('l10n_id_gdsk.1_chart_270006'),ref('l10n_id_gdsk.1_chart_270007'),ref('l10n_id_gdsk.1_chart_270008'),ref('l10n_id_gdsk.1_chart_270009'),])]" />
+        </record>
+        <record id="akun_917" model="ins.account.financial.report">
+            <field name="name">LONG TERM DEBT</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_811" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_918" model="ins.account.financial.report">
+            <field name="name">LONG TERM DEBT BANK</field>
+            <field name="parent_id" ref="akun_917" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_280001'),ref('l10n_id_gdsk.1_chart_280002'),ref('l10n_id_gdsk.1_chart_280003'),])]" />
+        </record>
+        <record id="akun_922" model="ins.account.financial.report">
+            <field name="name">ACCOUNT PAYABLE LEASING</field>
+            <field name="parent_id" ref="akun_917" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_281001'),ref('l10n_id_gdsk.1_chart_281002'),])]" />
+        </record>
+        <record id="akun_925" model="ins.account.financial.report">
+            <field name="name">EKUITAS</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="ins_account_financial_report_balancesheet0" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_926" model="ins.account.financial.report">
+            <field name="name">MODAL</field>
+            <field name="parent_id" ref="akun_925" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_290001'),])]" />
+        </record>
+        <record id="akun_928" model="ins.account.financial.report">
+            <field name="name">PAID IN CAPITAL</field>
+            <field name="parent_id" ref="akun_925" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_291001'),])]" />
+        </record>
+        <record id="akun_930" model="ins.account.financial.report">
+            <field name="name">RETAINED EARNING</field>
+            <field name="parent_id" ref="akun_925" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_292001'),ref('l10n_id_gdsk.1_chart_292002'),])]" />
+        </record>
+        <record id="akun_933" model="ins.account.financial.report">
+            <field name="name">TAMBAHAN MODAL DISETOR</field>
+            <field name="parent_id" ref="akun_925" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_294002'),])]" />
+        </record>
+        <record id="akun_935" model="ins.account.financial.report">
+            <field name="name">OCI - AKUMULASI</field>
+            <field name="parent_id" ref="akun_925" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_294001'),])]" />
+        </record>
+        <record id="ins_account_financial_report_profitandloss0" model="ins.account.financial.report">
+            <field name="name">PROFIT &amp; LOSS</field>
+            <field name="type">sum</field>
+            <!-- <field name="parent_id" ref="akun_622" /> -->
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_938" model="ins.account.financial.report">
+            <field name="name">PENDAPATAN</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="ins_account_financial_report_profitandloss0" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_939" model="ins.account.financial.report">
+            <field name="name">PENJUALAN REGULER</field>
+            <field name="parent_id" ref="akun_938" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_300001'),ref('l10n_id_gdsk.1_chart_300002'),ref('l10n_id_gdsk.1_chart_300003'),ref('l10n_id_gdsk.1_chart_300006'),ref('l10n_id_gdsk.1_chart_300007'),])]" />
+        </record>
+        <record id="akun_945" model="ins.account.financial.report">
+            <field name="name">PENJUALAN NON REGULER</field>
+            <field name="parent_id" ref="akun_938" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_310001'),ref('l10n_id_gdsk.1_chart_310002'),])]" />
+        </record>
+        <record id="akun_948" model="ins.account.financial.report">
+            <field name="name">PENGURANG PENJUALAN</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_938" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_949" model="ins.account.financial.report">
+            <field name="name">DISCOUNT</field>
+            <field name="parent_id" ref="akun_948" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_350001'),ref('l10n_id_gdsk.1_chart_350002'),ref('l10n_id_gdsk.1_chart_350003'),])]" />
+        </record>
+        <record id="akun_953" model="ins.account.financial.report">
+            <field name="name">COST OF AREA</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="ins_account_financial_report_profitandloss0" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_954" model="ins.account.financial.report">
+            <field name="name">HPP</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_953" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_955" model="ins.account.financial.report">
+            <field name="name">DIRECT MATERIAL / FOOD COST (HPP)</field>
+            <field name="parent_id" ref="akun_954" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_600001'),ref('l10n_id_gdsk.1_chart_600002'),ref('l10n_id_gdsk.1_chart_600003'),ref('l10n_id_gdsk.1_chart_600004'),ref('l10n_id_gdsk.1_chart_600005'),ref('l10n_id_gdsk.1_chart_600006'),ref('l10n_id_gdsk.1_chart_600007'),])]" />
+        </record>
+        <record id="akun_963" model="ins.account.financial.report">
+            <field name="name">INDIRECT MATERIAL / CONSUMABLE (HPP)</field>
+            <field name="parent_id" ref="akun_954" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_601001'),ref('l10n_id_gdsk.1_chart_601002'),ref('l10n_id_gdsk.1_chart_601003'),ref('l10n_id_gdsk.1_chart_601004'),ref('l10n_id_gdsk.1_chart_601005'),ref('l10n_id_gdsk.1_chart_601006'),])]" />
+        </record>
+        <record id="akun_970" model="ins.account.financial.report">
+            <field name="name">DIRECT LABOR</field>
+            <field name="parent_id" ref="akun_954" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_602001'),ref('l10n_id_gdsk.1_chart_602002'),ref('l10n_id_gdsk.1_chart_602003'),ref('l10n_id_gdsk.1_chart_602004'),ref('l10n_id_gdsk.1_chart_602005'),ref('l10n_id_gdsk.1_chart_602006'),ref('l10n_id_gdsk.1_chart_602007'),ref('l10n_id_gdsk.1_chart_602008'),ref('l10n_id_gdsk.1_chart_602009'),ref('l10n_id_gdsk.1_chart_602010'),ref('l10n_id_gdsk.1_chart_602011'),ref('l10n_id_gdsk.1_chart_602012'),ref('l10n_id_gdsk.1_chart_602013'),ref('l10n_id_gdsk.1_chart_602014'),ref('l10n_id_gdsk.1_chart_602015'),ref('l10n_id_gdsk.1_chart_602016'),ref('l10n_id_gdsk.1_chart_602017'),ref('l10n_id_gdsk.1_chart_602018'),ref('l10n_id_gdsk.1_chart_602019'),ref('l10n_id_gdsk.1_chart_602020'),ref('l10n_id_gdsk.1_chart_602021'),ref('l10n_id_gdsk.1_chart_602022'),ref('l10n_id_gdsk.1_chart_602023'),ref('l10n_id_gdsk.1_chart_602024'),ref('l10n_id_gdsk.1_chart_602025'),ref('l10n_id_gdsk.1_chart_602026'),ref('l10n_id_gdsk.1_chart_602027'),ref('l10n_id_gdsk.1_chart_602028'),ref('l10n_id_gdsk.1_chart_602029'),ref('l10n_id_gdsk.1_chart_602030'),ref('l10n_id_gdsk.1_chart_602031'),ref('l10n_id_gdsk.1_chart_602050'),])]" />
+        </record>
+        <record id="akun_1003" model="ins.account.financial.report">
+            <field name="name">DEPRECIATION &amp; AMORTIZATION</field>
+            <field name="parent_id" ref="akun_954" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_603001'),ref('l10n_id_gdsk.1_chart_603002'),ref('l10n_id_gdsk.1_chart_603003'),ref('l10n_id_gdsk.1_chart_603004'),ref('l10n_id_gdsk.1_chart_603005'),])]" />
+        </record>
+        <record id="akun_1009" model="ins.account.financial.report">
+            <field name="name">BEBAN OPERASIONAL</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="ins_account_financial_report_profitandloss0" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_1010" model="ins.account.financial.report">
+            <field name="name">BEBAN</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_1009" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_1011" model="ins.account.financial.report">
+            <field name="name">PERSONNEL EXPENSES</field>
+            <field name="parent_id" ref="akun_1010" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_610001'),ref('l10n_id_gdsk.1_chart_610002'),ref('l10n_id_gdsk.1_chart_610003'),ref('l10n_id_gdsk.1_chart_610004'),ref('l10n_id_gdsk.1_chart_610005'),ref('l10n_id_gdsk.1_chart_610006'),ref('l10n_id_gdsk.1_chart_610007'),ref('l10n_id_gdsk.1_chart_610008'),ref('l10n_id_gdsk.1_chart_610009'),ref('l10n_id_gdsk.1_chart_610010'),ref('l10n_id_gdsk.1_chart_610011'),ref('l10n_id_gdsk.1_chart_610012'),ref('l10n_id_gdsk.1_chart_610013'),ref('l10n_id_gdsk.1_chart_610014'),ref('l10n_id_gdsk.1_chart_610015'),ref('l10n_id_gdsk.1_chart_610016'),ref('l10n_id_gdsk.1_chart_610017'),ref('l10n_id_gdsk.1_chart_610018'),ref('l10n_id_gdsk.1_chart_610019'),ref('l10n_id_gdsk.1_chart_610020'),ref('l10n_id_gdsk.1_chart_610021'),ref('l10n_id_gdsk.1_chart_610022'),ref('l10n_id_gdsk.1_chart_610023'),ref('l10n_id_gdsk.1_chart_610024'),ref('l10n_id_gdsk.1_chart_610025'),ref('l10n_id_gdsk.1_chart_610026'),ref('l10n_id_gdsk.1_chart_610027'),ref('l10n_id_gdsk.1_chart_610028'),ref('l10n_id_gdsk.1_chart_610029'),ref('l10n_id_gdsk.1_chart_610030'),ref('l10n_id_gdsk.1_chart_610031'),ref('l10n_id_gdsk.1_chart_610050'),])]" />
+        </record>
+        <record id="akun_1044" model="ins.account.financial.report">
+            <field name="name">MARKETING EXPENSES</field>
+            <field name="parent_id" ref="akun_1010" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_611001'),ref('l10n_id_gdsk.1_chart_611002'),ref('l10n_id_gdsk.1_chart_611003'),ref('l10n_id_gdsk.1_chart_611004'),ref('l10n_id_gdsk.1_chart_611005'),ref('l10n_id_gdsk.1_chart_611006'),ref('l10n_id_gdsk.1_chart_611007'),ref('l10n_id_gdsk.1_chart_611009'),])]" />
+        </record>
+        <record id="akun_1053" model="ins.account.financial.report">
+            <field name="name">DISTRIBUTION EXPENSES</field>
+            <field name="parent_id" ref="akun_1010" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_612001'),ref('l10n_id_gdsk.1_chart_612002'),ref('l10n_id_gdsk.1_chart_612003'),ref('l10n_id_gdsk.1_chart_612009'),])]" />
+        </record>
+        <record id="akun_1058" model="ins.account.financial.report">
+            <field name="name">GENERAL ADMINISTRATION EXPENSES</field>
+            <field name="parent_id" ref="akun_1010" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_613001'),ref('l10n_id_gdsk.1_chart_613002'),ref('l10n_id_gdsk.1_chart_613003'),ref('l10n_id_gdsk.1_chart_613004'),ref('l10n_id_gdsk.1_chart_613005'),ref('l10n_id_gdsk.1_chart_613006'),ref('l10n_id_gdsk.1_chart_613007'),ref('l10n_id_gdsk.1_chart_613008'),ref('l10n_id_gdsk.1_chart_613009'),ref('l10n_id_gdsk.1_chart_613010'),ref('l10n_id_gdsk.1_chart_613011'),ref('l10n_id_gdsk.1_chart_613012'),ref('l10n_id_gdsk.1_chart_613013'),ref('l10n_id_gdsk.1_chart_613014'),ref('l10n_id_gdsk.1_chart_613015'),ref('l10n_id_gdsk.1_chart_613016'),ref('l10n_id_gdsk.1_chart_613017'),ref('l10n_id_gdsk.1_chart_613018'),ref('l10n_id_gdsk.1_chart_613019'),ref('l10n_id_gdsk.1_chart_613020'),ref('l10n_id_gdsk.1_chart_613021'),ref('l10n_id_gdsk.1_chart_613022'),ref('l10n_id_gdsk.1_chart_613023'),ref('l10n_id_gdsk.1_chart_613024'),ref('l10n_id_gdsk.1_chart_613025'),ref('l10n_id_gdsk.1_chart_613026'),ref('l10n_id_gdsk.1_chart_613027'),ref('l10n_id_gdsk.1_chart_613028'),ref('l10n_id_gdsk.1_chart_613029'),ref('l10n_id_gdsk.1_chart_613030'),ref('l10n_id_gdsk.1_chart_613031'),ref('l10n_id_gdsk.1_chart_613032'),ref('l10n_id_gdsk.1_chart_613033'),ref('l10n_id_gdsk.1_chart_613034'),ref('l10n_id_gdsk.1_chart_613035'),ref('l10n_id_gdsk.1_chart_613036'),ref('l10n_id_gdsk.1_chart_613037'),ref('l10n_id_gdsk.1_chart_613038'),ref('l10n_id_gdsk.1_chart_613039'),ref('l10n_id_gdsk.1_chart_613040'),ref('l10n_id_gdsk.1_chart_613041'),ref('l10n_id_gdsk.1_chart_613042'),ref('l10n_id_gdsk.1_chart_613043'),ref('l10n_id_gdsk.1_chart_613044'),ref('l10n_id_gdsk.1_chart_613045'),ref('l10n_id_gdsk.1_chart_613046'),ref('l10n_id_gdsk.1_chart_613047'),ref('l10n_id_gdsk.1_chart_613048'),ref('l10n_id_gdsk.1_chart_613049'),ref('l10n_id_gdsk.1_chart_613050'),])]" />
+        </record>
+        <record id="akun_1109" model="ins.account.financial.report">
+            <field name="name">RENTAL EXPENSES</field>
+            <field name="parent_id" ref="akun_1010" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_614001'),ref('l10n_id_gdsk.1_chart_614002'),ref('l10n_id_gdsk.1_chart_614003'),ref('l10n_id_gdsk.1_chart_614004'),ref('l10n_id_gdsk.1_chart_614009'),])]" />
+        </record>
+        <record id="akun_1115" model="ins.account.financial.report">
+            <field name="name">BIAYA DEPRECIATION &amp; AMORTIZATION</field>
+            <field name="parent_id" ref="akun_1010" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_615001'),ref('l10n_id_gdsk.1_chart_615002'),ref('l10n_id_gdsk.1_chart_615003'),ref('l10n_id_gdsk.1_chart_615004'),ref('l10n_id_gdsk.1_chart_615005'),ref('l10n_id_gdsk.1_chart_615009'),])]" />
+        </record>
+        <record id="akun_1122" model="ins.account.financial.report">
+            <field name="name">OPERATING EXPENSES</field>
+            <field name="parent_id" ref="ins_account_financial_report_profitandloss0" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_700000'),ref('l10n_id_gdsk.1_chart_B40'),ref('l10n_id_gdsk.1_chart_B41'),])]" />
+        </record>
+        <record id="akun_1123" model="ins.account.financial.report">
+            <field name="name">BEBAN</field>
+            <field name="parent_id" ref="akun_1122" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_700001'),ref('l10n_id_gdsk.1_chart_700002'),ref('l10n_id_gdsk.1_chart_700003'),ref('l10n_id_gdsk.1_chart_700004'),ref('l10n_id_gdsk.1_chart_700005'),ref('l10n_id_gdsk.1_chart_700006'),ref('l10n_id_gdsk.1_chart_700007'),ref('l10n_id_gdsk.1_chart_700008'),ref('l10n_id_gdsk.1_chart_700009'),ref('l10n_id_gdsk.1_chart_700010'),ref('l10n_id_gdsk.1_chart_700011'),ref('l10n_id_gdsk.1_chart_700012'),ref('l10n_id_gdsk.1_chart_700013'),ref('l10n_id_gdsk.1_chart_700014'),ref('l10n_id_gdsk.1_chart_700015'),ref('l10n_id_gdsk.1_chart_700016'),ref('l10n_id_gdsk.1_chart_700017'),ref('l10n_id_gdsk.1_chart_700018'),ref('l10n_id_gdsk.1_chart_700019'),ref('l10n_id_gdsk.1_chart_700020'),ref('l10n_id_gdsk.1_chart_700021'),ref('l10n_id_gdsk.1_chart_700022'),ref('l10n_id_gdsk.1_chart_700023'),ref('l10n_id_gdsk.1_chart_700024'),ref('l10n_id_gdsk.1_chart_700025'),ref('l10n_id_gdsk.1_chart_700026'),ref('l10n_id_gdsk.1_chart_700027'),ref('l10n_id_gdsk.1_chart_700028'),ref('l10n_id_gdsk.1_chart_700029'),ref('l10n_id_gdsk.1_chart_700030'),ref('l10n_id_gdsk.1_chart_700031'),ref('l10n_id_gdsk.1_chart_700050'),ref('l10n_id_gdsk.1_chart_701001'),ref('l10n_id_gdsk.1_chart_701002'),ref('l10n_id_gdsk.1_chart_701003'),ref('l10n_id_gdsk.1_chart_701004'),ref('l10n_id_gdsk.1_chart_701005'),ref('l10n_id_gdsk.1_chart_701006'),ref('l10n_id_gdsk.1_chart_701007'),ref('l10n_id_gdsk.1_chart_701008'),ref('l10n_id_gdsk.1_chart_701009'),ref('l10n_id_gdsk.1_chart_701010'),ref('l10n_id_gdsk.1_chart_701011'),ref('l10n_id_gdsk.1_chart_701012'),ref('l10n_id_gdsk.1_chart_701013'),ref('l10n_id_gdsk.1_chart_701014'),ref('l10n_id_gdsk.1_chart_701015'),ref('l10n_id_gdsk.1_chart_701016'),ref('l10n_id_gdsk.1_chart_701017'),ref('l10n_id_gdsk.1_chart_701018'),ref('l10n_id_gdsk.1_chart_701019'),ref('l10n_id_gdsk.1_chart_701020'),ref('l10n_id_gdsk.1_chart_701021'),ref('l10n_id_gdsk.1_chart_701022'),ref('l10n_id_gdsk.1_chart_701023'),ref('l10n_id_gdsk.1_chart_701024'),ref('l10n_id_gdsk.1_chart_701025'),ref('l10n_id_gdsk.1_chart_701026'),ref('l10n_id_gdsk.1_chart_701027'),ref('l10n_id_gdsk.1_chart_701028'),ref('l10n_id_gdsk.1_chart_701029'),ref('l10n_id_gdsk.1_chart_701030'),ref('l10n_id_gdsk.1_chart_701031'),ref('l10n_id_gdsk.1_chart_701032'),ref('l10n_id_gdsk.1_chart_701033'),ref('l10n_id_gdsk.1_chart_701034'),ref('l10n_id_gdsk.1_chart_701035'),ref('l10n_id_gdsk.1_chart_701036'),ref('l10n_id_gdsk.1_chart_701037'),ref('l10n_id_gdsk.1_chart_701038'),ref('l10n_id_gdsk.1_chart_701039'),ref('l10n_id_gdsk.1_chart_701040'),ref('l10n_id_gdsk.1_chart_701041'),ref('l10n_id_gdsk.1_chart_701042'),ref('l10n_id_gdsk.1_chart_701043'),ref('l10n_id_gdsk.1_chart_701044'),ref('l10n_id_gdsk.1_chart_701045'),ref('l10n_id_gdsk.1_chart_701046'),ref('l10n_id_gdsk.1_chart_701047'),ref('l10n_id_gdsk.1_chart_701048'),ref('l10n_id_gdsk.1_chart_701049'),ref('l10n_id_gdsk.1_chart_701050'),ref('l10n_id_gdsk.1_chart_702001'),ref('l10n_id_gdsk.1_chart_702002'),ref('l10n_id_gdsk.1_chart_702003'),ref('l10n_id_gdsk.1_chart_702009'),ref('l10n_id_gdsk.1_chart_703001'),ref('l10n_id_gdsk.1_chart_703002'),ref('l10n_id_gdsk.1_chart_703003'),ref('l10n_id_gdsk.1_chart_703004'),ref('l10n_id_gdsk.1_chart_703005'),ref('l10n_id_gdsk.1_chart_703019'),])]" />
+        </record>
+        <record id="akun_1217" model="ins.account.financial.report">
+            <field name="name">PENDAPATAN DAN BIAYA LAINNYA</field>
+            <field name="type">sum</field>
+            <field name="parent_id" ref="akun_1122" />
+            <field name="sign">1</field>
+        </record>
+        <record id="akun_1218" model="ins.account.financial.report">
+            <field name="name">OTHER INCOME</field>
+            <field name="parent_id" ref="akun_1217" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_810001'),ref('l10n_id_gdsk.1_chart_810002'),ref('l10n_id_gdsk.1_chart_810003'),ref('l10n_id_gdsk.1_chart_810004'),ref('l10n_id_gdsk.1_chart_810005'),ref('l10n_id_gdsk.1_chart_810006'),ref('l10n_id_gdsk.1_chart_810009'),])]" />
+        </record>
+        <record id="akun_1226" model="ins.account.financial.report">
+            <field name="name">OTHER EXPENSES</field>
+            <field name="parent_id" ref="akun_1217" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_820001'),ref('l10n_id_gdsk.1_chart_820002'),ref('l10n_id_gdsk.1_chart_820003'),ref('l10n_id_gdsk.1_chart_820004'),ref('l10n_id_gdsk.1_chart_820005'),ref('l10n_id_gdsk.1_chart_820006'),ref('l10n_id_gdsk.1_chart_820007'),ref('l10n_id_gdsk.1_chart_820009'),])]" />
+        </record>
+        <record id="akun_1235" model="ins.account.financial.report">
+            <field name="name">BEBAN PAJAK</field>
+            <field name="parent_id" ref="ins_account_financial_report_profitandloss0" />
+            <field name="type">accounts</field>
+            <field name="sign">1</field>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="account_ids" eval="[(6, 0, [ref('l10n_id_gdsk.1_chart_900001'),ref('l10n_id_gdsk.1_chart_900003'),ref('l10n_id_gdsk.1_chart_900004'),ref('l10n_id_gdsk.1_chart_900002'),ref('l10n_id_gdsk.1_chart_900005'),])]" />
+        </record>
+
+    </data>
+</odoo>

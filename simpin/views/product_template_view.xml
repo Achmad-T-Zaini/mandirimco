@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="product_template_form_view_inherit">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="after">
+               <div>
+                  <field name="is_simpin"/>
+                  <label for="is_simpin"/>
+               </div>
+            </div>
+            <xpath expr="//page[@name='sales']" position="after">
+				<page string="SimPin" attrs="{'invisible': [('is_simpin','=',False)]}">
+				<group>
+    	            <field name="jenis_simpin"/>
+    	            <field name="minimal_setor" attrs="{'invisible': [('jenis_simpin','!=','simpanan')]}"/>
+    	            <field name="coa_piutang" attrs="{'invisible': [('jenis_simpin','!=','pinjaman')]}"/>
+    	            <field name="coa_piutang_margin" attrs="{'invisible': [('jenis_simpin','!=','pinjaman')]}"/>
+    	            <field name="coa_margin" attrs="{'invisible': [('jenis_simpin','!=','pinjaman')]}"/>
+				</group>
+                <group>
+					<notebook>
+					  <page string="Interest">
+		        		    <field name="interest_lines" widget="one2many_list">
+		                	   <tree string="Nisbah" editable="bottom">
+		                         <field name="name" />
+		                         <field name="periode_min" />
+		                         <field name="periode_max" />
+		                         <field name="nilai_min" />
+		                         <field name="nilai_max" />
+		                         <field name="margin" />
+		                   		</tree>
+							<form>
+		                       <group>
+			                       <group>
+			                         <field name="name" />
+			                         <field name="periode_min" />
+			                         <field name="periode_max" />
+			                         <field name="nilai_min" />
+			                         <field name="nilai_max" />
+			                         <field name="margin" />
+			                       </group>
+		                       </group>
+							</form>
+			    			</field>
+			  			</page>
+						<page string="Pelunasan">
+		            		<field name="pelunasan_lines" widget="one2many_list">
+		                   	<tree string="Kewajiban Pelunasan" editable="bottom">
+		                         <field name="name" />
+		                         <field name="periode_min" />
+		                         <field name="periode_max" />
+		                         <field name="pelunasan" />
+		                   	</tree>
+							<form>
+		                       <group>
+			                       <group>
+			                         <field name="name" />
+			                         <field name="periode_min" />
+			                         <field name="periode_max" />
+			                         <field name="pelunasan" />
+			                       </group>
+		                       </group>
+							</form>
+			    			</field>
+			  			</page>
+			  			<page string="Komponen Biaya" >
+		            		<group>
+		        	    		<field name="biaya_lines" nolabel="1">
+								<tree editable="bottom">
+			        	            <field name="product_id"/>
+			        	            <field name="name" invisible='1'/>
+			        	            <field name="nilai_pct"/>
+			        	            <field name="nominal"/>
+			        	            <field name="is_edit"/>
+			        	            <field name="is_bill"/>
+								</tree>
+		        	    		</field>
+		            		</group>
+			  			</page>
+					</notebook>
+                </group>
+				</page>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
+

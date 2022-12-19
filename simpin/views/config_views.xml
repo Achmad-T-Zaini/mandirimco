@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+    	<menuitem id="simpin_config_master" parent="simpin_config_menu" 
+		name="--- MASTER ---" sequence="10" groups="group_simpin_user,group_simpin_officer,group_simpin_manager"/>
+
+    	<menuitem id="simpin_config_wilayah" parent="simpin_config_menu" 
+		name="--- WILAYAH ---" sequence="20" groups="group_simpin_user,group_simpin_officer,group_simpin_manager"/>
+
+        <record id="master_general_form" model="ir.ui.view">
+            <field name="name">master.general.form</field>
+            <field name="model">master.general</field>
+            <field name="arch" type="xml">
+                <form string="Account">
+                   <sheet>
+                       <group>
+	                    <field name="name" />
+	                    <field name="type_umum" />
+                       </group>
+                    </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_general_tree" model="ir.ui.view">
+            <field name="name">master.general.tree</field>
+            <field name="model">master.general</field>
+            <field name="arch" type="xml">
+                <tree string="General Config">
+                    <field name="name" />
+                    <field name="type_umum" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="simpin_general_config_action" model="ir.actions.act_window">
+            <field name="name">General Config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.general</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create General Config
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_general_config" parent="simpin_config_master" 
+		name="General Config" sequence="5" action="simpin_general_config_action"/>
+
+<!--  WILAYAH -->
+
+
+        <record id="wilayah_provinsi_tree" model="ir.ui.view">
+            <field name="name">wilayah.provinsi.tree</field>
+            <field name="model">wilayah.provinsi</field>
+            <field name="arch" type="xml">
+                <tree string="Tipe Transaksi" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="wilayah_provinsi_action" model="ir.actions.act_window">
+            <field name="name">Provinsi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wilayah.provinsi</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Provinsi
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_wilayah_provinsi" parent="simpin_config_wilayah" 
+		name="     Provinsi" sequence="1" action="wilayah_provinsi_action"/>
+
+        <record id="wilayah_kabkota_tree" model="ir.ui.view">
+            <field name="name">wilayah.kabkota.tree</field>
+            <field name="model">wilayah.kabkota</field>
+            <field name="arch" type="xml">
+                <tree string="Tipe Transaksi" editable="bottom">
+                    <field name="provinsi_id" />
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="wilayah_kabkota_action" model="ir.actions.act_window">
+            <field name="name">Kab / Kota</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wilayah.kabkota</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Kabupaten / Kotamadya
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_wilayah_kabkota" parent="simpin_config_wilayah" 
+		name="     Kab / Kota" sequence="2" action="wilayah_kabkota_action"/>
+
+        <record id="wilayah_kecamatan_tree" model="ir.ui.view">
+            <field name="name">wilayah.kecamatan.tree</field>
+            <field name="model">wilayah.kecamatan</field>
+            <field name="arch" type="xml">
+                <tree string="Tipe Transaksi" editable="bottom">
+                    <field name="kabkota_id" />
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="wilayah_kecamatan_action" model="ir.actions.act_window">
+            <field name="name">Kecamatan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wilayah.kecamatan</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Kecamatan
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_wilayah_kecamatan" parent="simpin_config_wilayah" 
+		name="     Kecamatan" sequence="3" action="wilayah_kecamatan_action"/>
+
+        <record id="wilayah_kelurahan_tree" model="ir.ui.view">
+            <field name="name">wilayah.kelurahan.tree</field>
+            <field name="model">wilayah.kelurahan</field>
+            <field name="arch" type="xml">
+                <tree string="Tipe Transaksi" editable="bottom">
+                    <field name="kecamatan_id" />
+                    <field name="name" />
+                    <field name="kodepos" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="wilayah_kelurahan_action" model="ir.actions.act_window">
+            <field name="name">Kelurahan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wilayah.kelurahan</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Kelurahan
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_wilayah_kelurahan" parent="simpin_config_wilayah" 
+		name="     Kelurahan" sequence="3" action="wilayah_kelurahan_action"/>
+
+
+        <record id="res_partner_position_tree" model="ir.ui.view">
+            <field name="name">res.partner.position.tree</field>
+            <field name="model">res.partner.position</field>
+            <field name="arch" type="xml">
+                <tree string="Position" editable="bottom">
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+    	<record id="res_partner_position_action" model="ir.actions.act_window">
+            <field name="name">Position</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.position</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Partner Position
+              </p>
+            </field>
+        </record>
+
+        <record id="res_partner_company_group_tree" model="ir.ui.view">
+            <field name="name">res.partner.company.group.tree</field>
+            <field name="model">res.partner.company.group</field>
+            <field name="arch" type="xml">
+                <tree string="Position" editable="bottom">
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+    	<record id="res_partner_company_group_action" model="ir.actions.act_window">
+            <field name="name">Position</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.company.group</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Partner Company Group
+              </p>
+            </field>
+        </record>
+
+    <menuitem id="res_partner_position_menu" name="Position"
+        action="res_partner_position_action" parent="contacts.res_partner_menu_config"
+        sequence="4"/>
+
+    <menuitem id="res_partner_company_group_menu" name="Company Group"
+        action="res_partner_company_group_action" parent="contacts.res_partner_menu_config"
+        sequence="4"/>
+
+	</data>
+</odoo>
+

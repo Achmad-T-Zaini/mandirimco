@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <!-- Add you code here -->
+
+        <record id="action_ar_clearing_ageing_wizard" model="ir.actions.act_window">
+            <field name="name">AR Clearing Ageing</field>
+            <field name="res_model">ins.partner.ageing</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ins_partner_ageing_wizard" />
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="account_dynamic_reports.model_ins_partner_ageing" />
+            <field name="binding_type">report</field>
+            <field name="context">{'clearing':'ar'}</field>
+        </record>
+
+        <!-- <menuitem action="action_ar_clearing_ageing_wizard" name="AR Clearing Ageing" parent="account_reports_ins" groups="account.group_account_user" /> -->
+        <!-- This Menu Item must have a parent and an action -->
+        <!-- <menuitem id="ar_clearing_report_menu_act" name="AR Clearing Ageing" parent="account_reports_ins" action="action_ar_clearing_ageing_wizard" sequence=""/> -->
+
+
+        <record id="action_ap_clearing_ageing_wizard" model="ir.actions.act_window">
+                <field name="name">AP Clearing Ageing</field>
+                <field name="res_model">ins.partner.ageing</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="ins_partner_ageing_wizard" />
+                <field name="target">new</field>
+                <field name="binding_model_id" ref="account_dynamic_reports.model_ins_partner_ageing" />
+                <field name="binding_type">report</field>
+                <field name="context">{'clearing':'ap'}</field>
+            </record>
+    
+            <!-- <menuitem action="action_ar_clearing_ageing_wizard" name="AR Clearing Ageing" parent="account_reports_ins" groups="account.group_account_user" /> -->
+            <!-- This Menu Item must have a parent and an action -->
+            <!-- <menuitem id="ap_clearing_report_menu_act" name="AP Clearing Ageing" parent="account_reports_ins" action="action_ap_clearing_ageing_wizard" sequence=""/> -->
+    </data>
+</odoo>

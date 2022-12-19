@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="view_account_payment_register_form_simpin" model="ir.ui.view">
+            <field name="name">account.payment.register.form.simpin</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <field name="communication" position='after'>
+                    <field name="pinjaman_id" invisible='1'/>
+                    <field name="investasi_id" invisible='1'/>
+                </field>
+            </field>
+        </record>
+
+        <record id="simpin_investasi_tree" model="ir.ui.view">
+            <field name="name">simpin.investasi.tree</field>
+            <field name="model">simpin.investasi</field>
+            <field name="arch" type="xml">
+                <tree string="Investasi Syariah">
+                    <field name="name" />
+                    <field name="member_id" />
+                    <field name="product_id" />
+                    <field name="total_investasi" />
+                    <field name="jangka_waktu" />
+                    <field name="jatuh_tempo" />
+                    <field name="pengembalian" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="simpin_investasi_filter" model="ir.ui.view">
+            <field name="name">simpin.investasi.select</field>
+            <field name="model">simpin.investasi</field>
+            <field name="arch" type="xml">
+                <search string="Search Investasi">
+                    <field name="name" string="Name" filter_domain="['|', ('name','ilike',self), ('member_id','ilike',self)]"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="submit" string="Submitted" domain="[('state', '=', 'submit')]"/>
+                    <filter name="approve" string="Approved" domain="[('state', '=', 'approve')]"/>
+                    <filter name="active" string="Active" domain="[('state', '=', 'active')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_product_id" string="Product" context="{'group_by':'product_id'}"/>
+                        <filter name="status" string="Status" context="{'group_by':'state'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+        <record id="simpin_investasi_form" model="ir.ui.view">
+            <field name="name">simpin.investasi.form</field>
+            <field name="model">simpin.investasi</field>
+            <field name="arch" type="xml">
+                <form string="Investasi Syariah">
+		<header>
+                  <button name="action_submit" string="Submit" type="object" class="oe_highlight" states="draft"/>
+                  <button name="action_check" string="Check Document" type="object" class="oe_highlight" states="submit"/>
+                  <button name="action_approve" string="Approve" type="object" class="oe_highlight" states="check"/>
+                  <button name="action_break" string="Break Investasi" type="object" class="oe_highlight" states="active"/>
+                  <field name="state" widget="statusbar" statusbar_visible="draft,submit,check,approve,active"/>
+		</header>
+		<sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Abdul" attrs="{'readonly': True}"/>
+                        </h1>
+                    </div>
+		<group>
+			<group>
+                	    <field name="member_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                	    <field name="product_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                	    <field name="journal_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                	    <field name="account_analytic_id" options="{'no_open': True, 'no_create': True}"  
+					attrs="{'readonly': [('state', 'not in', ['draft','submit','check'])]}"/>
+                	    <field name="ahli_waris_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			</group>
+			<group>
+                	    <field name="total_investasi" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                	    <field name="jangka_waktu" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    <label for="tanggal_akad" string="Periode"/>
+                    <div attrs="{'readonly': [('state', '!=', 'draft')]}">
+                        <field name="tanggal_akad" class="oe_inline"/> s/d <field name="jatuh_tempo" class="oe_inline" readonly='1' force_save='1'/>
+                    </div>
+                	    <field name="pengembalian" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}" required="1"/>
+                	    <field name="pembayaran_nisbah" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}" required="1"/>
+                	    <field name="nisbah_investor" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                	    <field name="pajak_nisbah" class="oe_inline"  options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			</group>
+		</group>
+		<notebook>
+			<page string='Informasi'>
+			<group>
+                	    <field name="move_investasi" readonly='1'/>
+			</group>
+			<separator/>
+			<group>
+    			    <field name="invoice_lines" widget="one2many_list" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                        <tree edit='false' create='false' delete='false'>
+                            <field name="name" />
+                            <field name="ref" />
+                            <field name="amount_total" />
+                            <field name="payment_state" />
+                        </tree>
+                    </field>
+			</group>
+			</page>
+		</notebook>
+		</sheet>
+            <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+            </div>
+                </form>
+            </field>
+        </record>
+
+	<record id="simpin_investasi_action" model="ir.actions.act_window">
+            <field name="name">Investasi Syariah</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">simpin.investasi</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create SimPin Syariah Investasi
+              </p>
+            </field>
+        </record>
+
+   	<menuitem id="simpin_investasi" parent="simpin_layanan_menu" 
+		name="Investasi" sequence='3' action="simpin_investasi_action"
+ 		groups="simpin.group_simpin_user"/>
+
+	</data>
+</odoo>
+

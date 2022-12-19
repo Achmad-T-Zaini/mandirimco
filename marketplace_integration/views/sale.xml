@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <!-- Views Sales Order-->
+        <record id="view_order_form_marketplace" model="ir.ui.view">
+            <field name="name">sale.order.form.marketplace</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <group name="sale_shipping" position="after">
+                    <group name="RajaOngkir" string="RajaOngkir">
+                        <field name="kurir" attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+                        <field name="origin" options="{'no_open': True, 'no_create_edit': True}" attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+                        <field name="destination" options="{'no_open': True, 'no_create_edit': True}" attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+                        <field name="weight" attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+                        <field name="jenis_kurir" readonly='1'>
+                            <tree create='false' edit='false'>
+                                <field name="name" />
+                                <field name="estimasi_harga" string="Harga"/>
+                                <field name="estimasi_waktu" string="ETD"/>
+                            </tree>
+                            <form string='Jenis Pengiriman'>
+                                <group>
+                                    <field name="name" />
+                                    <field name="estimasi_harga" string="Harga"/>
+                                    <field name="estimasi_waktu" string="ETD"/>
+                                </group>
+                                <footer>
+                                    <button string="Select" name="update_ongkir" type="object" class="btn-primary"/>
+                                    <button string="Close" class="oe_link" special="cancel"/>
+                                </footer>
+                            </form>
+                        </field>
+                        <field name="estimasi_harga" attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+                        <field name="estimasi_waktu" attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+	</data>
+</odoo>
+

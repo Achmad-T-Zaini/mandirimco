@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <!-- Views Sales Order-->
+        <record id="view_order_form_loa" model="ir.ui.view">
+            <field name="name">sale.order.form.loa</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,to_approve,approved,sent,purchase" readonly="1"/>
+                </field>
+
+                    <button id="action_confirm" position="replace" >
+                        <button name="button_to_approve" type="object" 
+                            string="Submit" class="oe_highlight" 
+                            attrs="{'invisible': [('state','not in',['draft','sent'])]}"
+                        />
+                        <button name="button_approved" type="object" 
+                            string="Approve" class="oe_highlight" 
+                            attrs="{'invisible': ['|',('state','not in','to_approve'),('is_approver','=', False),('loa_a1','=',True)]}"
+                            id="button_approved"/>
+                        <button name="button_approved" type="object" 
+                            string="Final Approve" class="oe_highlight" 
+                            attrs="{'invisible': ['|',('loa_a2','=',True),('approver2','=', False),('state','!=','to_approve'),('is_final_approver','=', False)]}"
+                            id="button_final_approved"/>
+                    </button>
+                    <button name="action_confirm" position="replace">
+                        <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': [('state','not in',['approved'])]}"/>
+                    </button>
+
+                <xpath  expr="//form/sheet/group" position='after'>
+                    <group>
+                    <field name="loa_type" widget="selection" 
+                            attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"
+                    />
+                    <field name="user_id" domain="[('share', '=', False)]" widget="many2one_avatar_user"/>
+                    <label for="approver1"/>
+			            <div>
+                            <field name="loa_a1" readonly="1" force_save="1"/>
+                        	<field name="approver1" readonly="1" force_save="1"/>
+			            </div>
+                    <field name="is_approver" invisible="1"/>
+                    <label for="approver2" string="Final Approver" attrs="{'invisible': [('approver2','=', False)]}" />
+			            <div>
+                            <field name="loa_a2" readonly="1" force_save="1" attrs="{'invisible': [('approver2','=', False)]}" />
+                            <field name="approver2" readonly="1" force_save="1" attrs="{'invisible': [('approver2','=', False)]}" />
+			            </div>
+                    <field name="is_final_approver" invisible="1" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</odoo>
+

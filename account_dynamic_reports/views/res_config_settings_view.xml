@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <!-- Add you code here -->
+        
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+                <field name="name">res.config.settings.view.form.clearing</field>
+                <field name="model">res.config.settings</field>
+                <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//div[@id='invoicing_settings']" position="after">
+                        <div id="config_ar_or_ap_clearing_ageing">
+                            <h2>Account AR/AP Clearing Ageing Reports</h2>
+                        </div>
+                        <div id="config_ar_or_ap_clearing_ageing_oe" class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label for="account_ar_id" class="col-lg-3"/>
+                                            <field name="account_ar_id"/>
+                                        </div>
+                                        <div class="row mt16">
+                                            <label for="account_ap_id" class="col-lg-3"/>
+                                            <field name="account_ap_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </xpath>
+                </field>
+            </record>
+
+    </data>
+</odoo>

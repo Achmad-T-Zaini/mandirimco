@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="simpin_member_tree" model="ir.ui.view">
+            <field name="name">simpin.member.tree</field>
+            <field name="model">simpin.member</field>
+            <field name="arch" type="xml">
+                <tree string="Member">
+                    <field name="nomor_induk" />
+                    <field name="name" />
+                    <field name="address" />
+                    <field name="email" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="simpin_member_filter" model="ir.ui.view">
+            <field name="name">simpin.member.select</field>
+            <field name="model">simpin.member</field>
+            <field name="arch" type="xml">
+                <search string="Search Member">
+                    <field name="name" string="Name" filter_domain="['|','|', ('name','ilike',self), ('email', 'ilike', self), ('nomor_induk', 'ilike', self)]"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="active" string="Active" domain="[('state', '=', 'done')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="status" string="Status" context="{'group_by':'state'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+
+        <record id="simpin_member_form" model="ir.ui.view">
+            <field name="name">simpin.member.form</field>
+            <field name="model">simpin.member</field>
+            <field name="arch" type="xml">
+                <form string="Member">
+		<header>
+                  <button name="action_submit" string="Submit" type="object" class="oe_highlight" states="draft"/>
+                  <field name="state" widget="statusbar" statusbar_visible="draft,submit,approve,done,cancel"/>
+		</header>
+		<sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Abdul" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </h1>
+                	    <field name="nomor_anggota" readonly='1' />
+                    </div>
+                        <notebook>
+                            <page name="public" string="Data Diri" >
+                				<group>
+                                    <group string="Informasi Pribadi">
+                                        <field name="agama"  options="{'no_create_edit': True, 'no_open': True}"/>
+                                        <field name="tempat_lahir" />
+                                        <field name="tanggal_lahir" />
+                                        <field name="type_identitas" options="{'no_create_edit': True, 'no_open': True}"/>
+                                        <field name="no_identitas" />
+                                        <field name="gender"  options="{'no_create_edit': True, 'no_open': True}"/>
+                                        <field name="marital" options="{'no_create_edit': True, 'no_open': True}"/>
+                                        <field name="npwp" />
+                                    </group>
+                                    <group string="Informasi Bank">
+                                        <field name="bank_id" options="{'no_create_edit': True, 'no_create': True, 'no_quick_create': True}"/>
+                                        <field name="bank_norek" />
+                                        <field name="bank_namarek" />
+                                    </group>
+                				</group>
+                            </page>
+                            <page name="address_information" string="Informasi Lokasi" >
+				                <group>
+                                    <group string="Tempat Tinggal">
+        	                    		<field name="address" />
+	                            		<field name="rukun_tetangga"  />
+	                            		<field name="rukun_warga"  />
+	                            		<field name="provinsi_id" options="{'no_open': True, 'no_create': True}" />
+	                    		        <field name="kabkota_id" options="{'no_open': True, 'no_create': True}" />
+        	                    		<field name="kecamatan_id" options="{'no_open': True, 'no_create': True}" />
+	                            		<field name="kelurahan_id" options="{'no_open': True, 'no_create': True}" />
+	                            		<field name="kodepos" />
+                                    </group>
+                				</group>
+                            </page>
+                            <page name="working_information" string="Informasi Pekerjaan" >
+                                <group>
+                                    <group string="Data Perusahaan">
+                                        <field name="nomor_induk" />
+                                        <field name="divisi" />
+                                        <field name="status_karyawan" />
+                                        <field name="jangka_waktu_kontrak" />
+                                        <field name="akhir_kontrak" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="kontak_information" string="Informasi Kontak" >
+                                <group>
+                                    <group string="Contact">
+                                        <field name="email" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="no_telp" />
+                                        <field name="no_hp" />
+                                        <field name="keluarga_dekat" />
+                                        <field name="no_keluarga" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="ahli_waris" string="Ahli Waris" >
+                                <group>
+		                        <field name="waris_lines" >
+		                            <tree string="Ahli Waris">
+		                                    <field name="name" />
+		                                    <field name="hubungan"  options="{'no_create_edit': True, 'no_open': True}"/>
+		                                    <field name="address" />
+		                                    <field name="no_hp" />
+		                                </tree>
+		                            <form>
+                		                <div>
+                		                    <group name="main">
+                		                        <group>
+					                    <field name="name"/>
+                		                            <field name="hubungan" options="{'no_create_edit': True, 'no_open': True}"/>
+                		                            <field name="hub_lain" attrs="{'invisible': [('hubungan', '!=', 'lain')]}"/>
+			                                    <field name="agama" options="{'no_create_edit': True, 'no_open': True}"/>
+                                        		    <field name="type_identitas" options="{'no_create_edit': True, 'no_open': True}"/>
+                                        		    <field name="no_identitas" />
+                                        		    <field name="gender" options="{'no_create_edit': True, 'no_open': True}"/>
+                		                        </group>
+                		                        <group>
+                		                            <field name="address"/>
+				                    		<field name="rukun_tetangga"  />
+				                    		<field name="rukun_warga"  />
+				                    		<field name="provinsi_id" options="{'no_open': True, 'no_create': True}" />
+				                    		<field name="kabkota_id" options="{'no_open': True, 'no_create': True}" />
+				                    		<field name="kecamatan_id" options="{'no_open': True, 'no_create': True}" />
+				                    		<field name="kelurahan_id" options="{'no_open': True, 'no_create': True}" />
+				                    		<field name="kodepos" />
+	 		                                        <field name="no_hp" />
+                		                        </group>
+                		                    </group>
+		                                </div>
+		                            </form>
+					</field>
+                                </group>
+                            </page>
+                        <page string="Dokumen Pendukung" >
+				<group>
+				<group>
+					<field name="upload_ktp" filename="file_ktp"/>
+					<field name="file_ktp" invisible="1"/>
+					<field name="upload_ktp_pasangan" filename="file_ktp_pasangan"/>
+					<field name="file_ktp_pasangan" invisible="1"/>
+					<field name="upload_kk" filename="file_kk"/>
+					<field name="file_kk" invisible="1"/>
+					<field name="upload_dok_lain" filename="file_dok_lain"/>
+					<field name="file_dok_lain" invisible="1"/>
+				</group>
+				</group>
+			</page>
+                        </notebook>
+		</sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+	<record id="simpin_member_menu_action" model="ir.actions.act_window">
+            <field name="name">Member</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">simpin.member</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create SimPin Member
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_member" parent="simpin_member_menu" 
+		name="Keanggotaan" sequence="1" action="simpin_member_menu_action"/>
+
+	</data>
+</odoo>
+

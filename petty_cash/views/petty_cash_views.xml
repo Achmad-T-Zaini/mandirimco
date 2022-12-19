@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="petty_cash_credit_form" model="ir.ui.view">
+            <field name="name">petty.cash.credit.form</field>
+            <field name="model">petty.cash.credit</field>
+            <field name="arch" type="xml">
+				<form >
+					<header>
+		                <button name="action_submit" string="Submit" type="object" class="oe_highlight" states="draft"/>
+	                  	<button name="action_approve" string="Approve" type="object" class="oe_highlight" states="submit"/>
+	                  	<button name="action_refuse" string="Refuse" type="object" states="draft,submit,approve"/>
+	    	            <field name="state" widget="statusbar" statusbar_visible="draft,submit,approve,done"/>
+					</header>
+					<group>
+						<group>
+							<field name='tanggal' attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+							<field name='name' attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+							<field name='move_id' attrs="{'invisible':[('move_id','=',False)]}"/>
+							<field name='kas_balance' invisible='1'/>
+						</group>
+						<group>
+							<field name='product_id' options="{'no_create_edit': True, 'no_quick_create': True}" attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+							<field name='quantity' attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+							<field name='price_unit' attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+							<field name='price_total' readonly='1' force_save='1'/>
+							<field name="binary_expense" string="Filename" filename="file_expense" required='1'/> 
+							<field name="file_expense" invisible="1"/>
+						</group>
+					</group>
+				</form>
+            </field>
+        </record>
+
+        <!-- Views -->
+        <record id="petty_cash_request_tree_view" model="ir.ui.view">
+            <field name="name">petty.cash.debit.tree</field>
+            <field name="model">petty.cash.debit</field>
+            <field name="arch" type="xml">
+                <tree string="Petty Cash Tree" create="false">
+                    <field name="tanggal"/>
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="kas_id"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="petty_cash_debit_form" model="ir.ui.view">
+            <field name="name">petty.cash.debit.form</field>
+            <field name="model">petty.cash.debit</field>
+            <field name="arch" type="xml">
+				<form create="false">
+					<header>
+	                    <button name="button_to_approve" type="object" states="draft,sent" string="Submit" class="oe_highlight" id="button_to_approve"/>
+    	                <button name="button_approved" type="object" string="Approve" class="oe_highlight" 
+        	                    attrs="{'invisible': ['|',('state','!=','to_approve'),'|',('is_approver','=', False),('loa_a1','=',True)]}" id="button_approved"/>
+            	        <button name="button_approved" type="object" string="Final Approve" class="oe_highlight" 
+                	            attrs="{'invisible': ['|',('loa_a2','=',True),'|',('approver2','=', False),'|',('state','!=','to_approve'),('is_final_approver','=', False)]}" id="button_approved"/>
+	                    <button name="button_confirm" type="object" states="approved" string="Confirm" 
+    	                        groups="petty_cash.group_petty_cash_manager" 
+        	                    class="oe_highlight" id="bid_confirm"/>
+	                    <button name="action_register_payment" type="object" states="posted" string="Register Payment" 
+    	                        groups="petty_cash.group_petty_cash_manager" 
+        	                    class="oe_highlight" id="reg_payment"/>
+	    	            <field name="state" widget="statusbar" statusbar_visible="draft,submit,approved,posted,paid,done"/>
+					</header>
+					<sheet>
+                    <widget name="web_ribbon" title="Paid" bg_color="bg-success" attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                    <div class="oe_edit_only">
+                        <label for="number" class="oe_inline" />
+                    </div>
+                    <h1>
+                        <field
+                            name="number"
+                            class="oe_inline" readonly='1' force_save='1'
+                        />
+                    </h1>
+					<group>
+						<group>
+							<field name='tanggal' attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+							<field name='name' attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+							<field name='amount' attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+							<field name='kas_id' invisible='1'/>
+                            <field name="fiscal_position_id" options="{'no_create': True}" attrs="{'readonly':[('state','not in',['draft','submit'])]}"/>
+						</group>
+						<group>
+		                    <field name="loa_type" widget="selection" 
+        		                    attrs="{'readonly': [('state', '=', 'done')]}" readonly='1'
+                		    />
+		                    <field name="user_id" domain="[('share', '=', False)]" widget="many2one_avatar_user" readonly='1'/>
+        		            <label for="approver1"/>
+			    		        <div>
+                        		    <field name="loa_a1" readonly="1" force_save="1"/>
+                        			<field name="approver1" readonly="1" force_save="1"/>
+					            </div>
+        		            <field name="is_approver" invisible="1"/>
+                		    <label for="approver2" string="Final Approver" attrs="{'invisible': [('approver2','=', False)]}" />
+			            		<div>
+		                            <field name="loa_a2" readonly="1" force_save="1" attrs="{'invisible': [('approver2','=', False)]}" />
+        		                    <field name="approver2" readonly="1" force_save="1" attrs="{'invisible': [('approver2','=', False)]}" />
+					            </div>
+        		            <field name="is_final_approver" invisible="1" />
+							<field name='invoice_id' readonly='1'/>
+							<field name='payment_id' readonly='1'/>
+						</group>
+					</group>
+					</sheet>
+				</form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_petty_cash_debit_action" model="ir.actions.act_window">
+            <field name="name">Petty Cash Request</field>
+            <field name="res_model">petty.cash.debit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create Petty Cash Request</p>
+            </field>
+        </record>
+
+
+        <!-- Views -->
+        <record id="petty_cash_tree_view" model="ir.ui.view">
+            <field name="name">petty.cash.tree</field>
+            <field name="model">petty.cash</field>
+            <field name="arch" type="xml">
+                <tree string="Petty Cash Tree">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="kas_balance"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="petty_cash_form" model="ir.ui.view">
+            <field name="name">petty.cash.form</field>
+            <field name="model">petty.cash</field>
+            <field name="arch" type="xml">
+				<form create='false'>
+				<sheet>
+					<group>
+						<group>
+							<field name="name" required='1'/>
+							<field name="user_id" attrs="{'readonly': [('kas_balance', '!=', 0)]}"/>
+							<field name="analytic_account_id" attrs="{'readonly': [('kas_balance', '!=', 0)]}"/>
+							<field name='journal_id' attrs="{'readonly': [('kas_balance', '!=', 0)]}" options="{'no_create_edit': True, 'no_quick_create': True}"/>
+						</group>
+						<group>
+							<field name="kas_debit" string='Total Cash' readonly='1'/>
+							<field name="kas_credit" string='Total Expense' readonly='1'/>
+							<field name="kas_balance" string='Balance' readonly='1'/>
+						</group>
+					</group>
+					<notebook>
+						<page string='Expenses'>
+							<group>
+								<field name='credit_lines' nolabel='1' >
+									<tree>
+										<field name='tanggal'/>
+										<field name='product_id'/>
+										<field name='name'/>
+										<field name='quantity'/>
+										<field name='price_unit'/>
+										<field name='price_total' sum='Total'/>
+										<field name='state'/>
+									</tree>
+								</field>
+							</group>
+						</page>
+						<page string='Cash In/Out'>
+							<group>
+								<field name='debit_lines' nolabel='1' context="{'default_state':'draft'}">
+									<tree>
+										<field name='tanggal'/>
+										<field name='name'/>
+										<field name='amount'/>
+										<field name='state' readonly='1'/>
+									</tree>
+								</field>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+				</form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_petty_cash_action" model="ir.actions.act_window">
+            <field name="name">Petty Cash</field>
+            <field name="res_model">petty.cash</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create Petty Cash</p>
+            </field>
+        </record>
+
+<!--        <record id="view_account_pettycash_payment_tree" model="ir.ui.view">
+            <field name="name">account.pettycash.payment.tree</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="attributes">
+                    <attribute name="string">Employee</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_account_payments_pettycash" model="ir.actions.act_window">
+            <field name="name">Payments</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">tree,kanban,form,graph</field>
+            <field name="context">{
+                'default_payment_type': 'outbound',
+                'default_partner_type': 'employee',
+                'default_move_journal_types': ('bank', 'cash'),
+            }</field>
+            <field name="domain">[('partner_type','=','employee')]</field>
+            <field name="view_id" ref="view_account_pettycash_payment_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                  Register a Petty Cash payment
+                </p><p>
+                  Payments are used to register liquidity movements. You can process those payments by your own means or by using installed facilities.
+                </p>
+            </field>
+        </record>
+-->
+
+        <!-- Menu -->
+        <menuitem id="menu_petty_cash_root" name="Cash"
+                   groups="petty_cash.group_petty_cash_user" parent="account.menu_finance" sequence="1"/>
+        <menuitem id="menu_petty_cash_action" action="action_petty_cash_action"
+                   groups="petty_cash.group_petty_cash_user" parent="menu_petty_cash_root" sequence="2"/>
+        <menuitem id="menu_petty_cash_request_action" action="action_petty_cash_debit_action"
+                   groups="petty_cash.group_petty_cash_user" parent="menu_petty_cash_root" sequence="3"/>
+<!--        <menuitem id="menu_petty_cash_payment_action" action="action_account_payments_pettycash"
+                   groups="petty_cash.group_petty_cash_user" parent="menu_petty_cash_root" sequence="4"/>
+-->
+	</data>
+</odoo>

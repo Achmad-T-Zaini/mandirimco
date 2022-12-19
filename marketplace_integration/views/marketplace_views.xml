@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="tokopedia_order_tree" model="ir.ui.view">
+            <field name="name">tokopedia.order.tree</field>
+            <field name="model">tokopedia.order</field>
+            <field name="arch" type="xml">
+                <tree string="Order" create='false' edit='false'>
+                    <field name="name" />
+                    <field name="nama_pembeli" />
+                    <field name="tanggal_kirim" />
+                    <field name="tanggal_selesai" />
+                    <field name="total_penjualan" />
+                    <field name="nama_kurir" />
+                    <field name="status_order" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="tokopedia_order_filter" model="ir.ui.view">
+            <field name="name">tokopedia.order.select</field>
+            <field name="model">tokopedia.order</field>
+            <field name="arch" type="xml">
+                <search string="Search Tokopedia">
+                    <field name="name" string="Name" filter_domain="['|','|', ('name','ilike',self), ('nama_pembeli','ilike',self),('status_order','ilike',self)]"/>
+                    <filter name="baru" string="Pesanan Baru" domain="[('status_order','=','Pesanan Baru')]"/>
+                    <filter name="selesai" string="Pesanan Selesai" domain="[('status_order','=','Pesanan Selesai')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_status_order" string="Order Status" context="{'group_by':'status_order'}"/>
+                        <filter name="group_by_nama_kurir" string="Kurir" context="{'group_by':'nama_kurir'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+        <record id="tokopedia_order_form" model="ir.ui.view">
+            <field name="name">tokopedia.order.form</field>
+            <field name="model">tokopedia.order</field>
+            <field name="arch" type="xml">
+                <form string="Order" create='false' edit='false'>
+            		<sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                        </div>
+    	    			<group>
+	    	    			<group>
+                        	    <field name="nama_pembeli" />
+                        	    <field name="telp_pembeli" />
+                        	    <field name="tanggal_pembayaran" />
+                                <field name="status_order" />
+    		    			</group>
+	    	    			<group>
+                        	    <field name="total_penjualan" />
+                        	    <field name="total_potongan" />
+                        	    <field name="total_net" />
+	    	    			</group>
+	        			</group>
+                        <notebook>
+                            <page string='Order Detail'>
+            			            <field name="tokopedia_line" widget="one2many_list" >
+                                        <tree edit='false' create='false' delete='false'>
+                                            <field name="product_id" />
+                                            <field name="nama_produk" />
+                                            <field name="kode_sku" />
+                                            <field name="product_qty" />
+                                            <field name="harga_jual" />
+                                            <field name="total" sum="Total"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page string='Pengiriman'>
+    	    	    			<group>
+        	    	    			<group>
+                			            <field name="nama_penerima" />
+                			            <field name="telp_penerima" />
+                    			        <field name="alamat_penerima" />
+                    			        <field name="kota_penerima" />
+                    			        <field name="prov_penerima" />
+    	    	    	    		</group>
+        	    	    			<group>
+                			            <field name="nama_kurir" />
+                			            <field name="type_kurir" />
+                    			        <field name="resi_kurir" />
+                                	    <field name="tanggal_kirim" />
+                                	    <field name="tanggal_selesai" />
+    	    	    	    		</group>
+	    	    	    		</group>
+                            </page>
+                            <page string='Payment'>
+            			            <field name="deposit_line" widget="one2many_list" >
+                                        <tree edit='false' create='false' delete='false'>
+                                    	    <field name="tanggal" />
+                                    	    <field name="name" string='Description'/>
+                                    	    <field name="nominal" sum='Total'/>
+                                        </tree>
+                                    </field>
+                            </page>
+                        </notebook>
+            		</sheet>
+                </form>
+            </field>
+        </record>
+
+    	<record id="tokopedia_order_action" model="ir.actions.act_window">
+            <field name="name">Tokopedia Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tokopedia.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_baru': 1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Import Tokopedia Order
+              </p>
+            </field>
+        </record>
+
+        <record id="tokopedia_deposit_tree" model="ir.ui.view">
+            <field name="name">tokopedia.deposit.tree</field>
+            <field name="model">tokopedia.deposit</field>
+            <field name="arch" type="xml">
+                <tree string="Order" create='false' edit='false'>
+                    <field name="tanggal" />
+                    <field name="name" />
+                    <field name="nominal" />
+                    <field name="balance" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="tokopedia_deposit_form" model="ir.ui.view">
+            <field name="name">tokopedia.deposit.form</field>
+            <field name="model">tokopedia.deposit</field>
+            <field name="arch" type="xml">
+                <form string="Order" create='false' edit='false'>
+            		<sheet>
+    	    			<group>
+	    	    			<group>
+                        	    <field name="tanggal" />
+                        	    <field name="name" />
+                        	    <field name="nominal" />
+                        	    <field name="balance" />
+	    	    			</group>
+	        			</group>
+            		</sheet>
+                </form>
+            </field>
+        </record>
+
+    	<record id="tokopedia_deposit_action" model="ir.actions.act_window">
+            <field name="name">Tokopedia Deposit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tokopedia.deposit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Import Tokopedia Deposit
+              </p>
+            </field>
+        </record>
+
+    	<record id="rajaongkir_kota_tree" model="ir.ui.view">
+            <field name="name">rajaongkir.kota.tree</field>
+            <field name="model">rajaongkir.kota</field>
+            <field name="arch" type="xml">
+                <tree string="RajaOngkir Kota" create='false' edit='false'>
+                    <field name="name" />
+                    <field name="type_kota" />
+                    <field name="kodepos" />
+                    <field name="prov_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="rajaongkir_kota_filter" model="ir.ui.view">
+            <field name="name">rajaongkir.kota.select</field>
+            <field name="model">rajaongkir.kota</field>
+            <field name="arch" type="xml">
+                <search string="Search RajaOngkir">
+                    <field name="name" string="Name" filter_domain="['|', ('name','ilike',self), ('prov_id.name','ilike',self)]"/>
+                    <filter name="kota" string="Kota" domain="[('type_kota','=','Kabupaten')]"/>
+                    <filter name="kab" string="Kabupaten" domain="[('type_kota','=','Kota')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_provinsi" string="Provinsi" context="{'group_by':'prov_id'}"/>
+                        <filter name="group_by_type_kota" string="Type Kota" context="{'group_by':'type_kota'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+        <record id="rajaongkir_kota_form" model="ir.ui.view">
+            <field name="name">rajaongkir.kota.form</field>
+            <field name="model">rajaongkir.kota</field>
+            <field name="arch" type="xml">
+                <form string="RajaOngkir Kota" create='false' edit='false'>
+            		<sheet>
+    	    			<group>
+	    	    			<group>
+                                <field name="name" />
+                                <field name="type_kota" />
+                                <field name="kodepos" />
+                                <field name="prov_id" />
+	    	    			</group>
+	        			</group>
+            		</sheet>
+                </form>
+            </field>
+        </record>
+
+    	<record id="rajaongkir_kota_action" model="ir.actions.act_window">
+            <field name="name">RajaOngkir Kota</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rajaongkir.kota</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Import RajaOngkir Kota
+              </p>
+            </field>
+        </record>
+
+        <record id="form_wizard_upload_data" model="ir.ui.view">
+            <field name="name">wizard.upload.data.form</field>
+            <field name="model">wizard.upload.data</field>
+            <field name="arch" type="xml">
+                <form string="Batch Pencairan">
+                    <h4>Upload File Data</h4>
+                    <p></p>
+        			<group>
+            			<group>
+	                        <field name="marketplaces" options="{'no_create_edit': True, 'no_quick_create': True, 'no_open': True}" />
+	                        <field name="type_data" />
+	                        <field name="file_data" filename="file_name" widget="binary" required="1" class="oe_inline"/>
+	                        <field name="file_name" invisible="1"/>
+    		        	</group>
+		        	</group>
+                    <footer>
+                        <button string="Upload" name="upload_batch_data" type="object" class="btn-primary"
+                        attrs="{'invisible': [('file_name', '=', False)]}"/>
+                        <button string="Close" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+<!-- Define the action -->
+
+        <record id="upload_data_marketplace_action" model="ir.actions.act_window">
+            <field name="name">Upload Data</field>
+            <field name="res_model">wizard.upload.data</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="form_wizard_upload_data"/>
+            <field name="binding_model_id" ref="model_wizard_upload_data" />
+            <field name="binding_view_types">list</field>
+        </record>
+
+<!-- Define the menu -->
+
+        <record id="marketplace_overview_tree" model="ir.ui.view">
+            <field name="name">marketplace.overview.tree</field>
+            <field name="model">marketplace.overview</field>
+            <field name="arch" type="xml">
+                <tree string="Marketplace">
+                    <field name="partner_id" />
+            	    <field name="new_order" />
+                    <field name="deliver_order" />
+            	    <field name="finish_order" />
+                    <field name="cancel_order" />
+                    <field name="balance" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="marketplace_overview_form" model="ir.ui.view">
+            <field name="name">marketplace.overview.form</field>
+            <field name="model">marketplace.overview</field>
+            <field name="arch" type="xml">
+                <form string="Marketplace" >
+            		<sheet>
+    	    			<group>
+	    	    			<group>
+                        	    <field name="partner_id" options="{'no_create_edit': True, 'no_quick_create': True}" />
+                        	    <field name="journal_id" options="{'no_create_edit': True, 'no_quick_create': True}" />
+                        	    <field name="template_data" />
+                        	    <field name="balance" readonly="1"/>
+	    	    			</group>
+	    	    			<group>
+                        	    <field name="new_order" readonly="1"/>
+                        	    <field name="deliver_order" readonly="1"/>
+                        	    <field name="finish_order" readonly="1"/>
+                        	    <field name="cancel_order" readonly="1"/>
+	    	    			</group>
+	        			</group>
+	        			<group>
+                        	    <field name="notes" />
+	        			</group>
+            		</sheet>
+                </form>
+            </field>
+        </record>
+
+    	<record id="marketplace_overview_action" model="ir.actions.act_window">
+            <field name="name">Overview</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">marketplace.overview</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Marketplace Overview
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_marketplace_root"
+            name="MarketPlace"
+            web_icon="marketplace_integration,static/src/img/icon.png"
+            sequence="5"
+            />
+        <menuitem id="menu_overview"
+            name="Overview"
+            parent="menu_marketplace_root"
+            action="marketplace_overview_action"
+            sequence="1"
+            />
+        <menuitem id="menu_tokopedia"
+            name="Tokopedia"
+            parent="menu_marketplace_root"
+            sequence="2"
+            />
+        <menuitem id="menu_tokopedia_order"
+            name="Order"
+            parent="menu_tokopedia"
+            action="tokopedia_order_action"
+            sequence="1"
+            />
+        <menuitem id="menu_tokopedia_deposit"
+            name="Deposit"
+            parent="menu_tokopedia"
+            action="tokopedia_deposit_action"
+            sequence="1"
+            />
+        <menuitem id="menu_upload_data_marketplace" 
+            name="Upload Data"
+            parent="menu_marketplace_root"
+            sequence="10"
+            action="upload_data_marketplace_action" 
+            />
+        <menuitem id="menu_ongkir" 
+            name="Kurir"
+            parent="menu_marketplace_root"
+            sequence="9"
+            />
+        <menuitem id="menu_rajaongkir" 
+            name="Daftar Kota RajaOngkir"
+            parent="menu_ongkir"
+            sequence="1"
+            action="rajaongkir_kota_action" 
+            />
+
+	</data>
+</odoo>
+

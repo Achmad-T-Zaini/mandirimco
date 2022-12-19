@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="api_mandiri_form_view" model="ir.ui.view">
+		<field name="name">api.mandiri.form</field>
+		<field name="model">mandiri_api.connect</field>
+		<field name="arch" type="xml">
+		<form string="API Mandiri" create='false'>
+		<sheet>
+			<group>
+				<group>
+					<field name='client_id'/>
+					<field name="privatekey_filedata" filename="privatekey_filename"/>
+					<field name="privatekey_filename" invisible="1"/>
+					<field name='privatekey_password'/>
+					<field name='client_secret'/>
+				</group>
+				<group>
+					<field name='url_path'/>
+					<field name='url_token'/>
+					<field name='partner_id'/>
+					<field name='external_id'/>
+					<field name='no_rek'/>
+				</group>
+			</group>
+			<group>
+				<group>
+					<field name='url_balance'/>
+					<field name='url_loan'/>
+					<field name='url_trx_saving'/>
+					<field name='url_trx_loan'/>
+					<field name='url_acc_info_internal'/>
+					<field name='url_acc_info_external'/>
+					<field name='url_inhouse_trf'/>
+					<field name='url_rtgs_trf'/>
+					<field name='url_skn_trf'/>
+					<field name='url_interbank'/>
+					<field name='url_trf_status'/>
+					<field name='url_bill_inquiry'/>
+					<field name='url_bill_payment'/>
+				</group>
+				<group>
+					<button name="info_balance" string="Info Balance" type="object" class="oe_highlight"/>
+					<button name="info_loan" string="Info Loan" type="object" class="oe_highlight"/>
+					<button name="info_trx_saving" string="Info Trx Saving" type="object" class="oe_highlight"/>
+				</group>
+			</group>
+		</sheet>
+		</form>
+            </field>
+        </record>
+
+	<record model="ir.actions.server" id="api_bank_action">
+		<field name="name">Mandiri API</field>
+        <field name="model_id" ref="model_mandiri_api_connect"/>
+        <field name="state">code</field>
+        <field name="code">
+        action = {
+                    "name": "Mandiri API",
+                    "type": "ir.actions.act_window",
+                    "view_type": "form",
+                    "view_mode": "form",
+                    "res_model": "mandiri_api.connect",
+                    "res_id": 1,
+                }
+
+        </field>
+	</record>
+
+        <menuitem action="api_bank_action" id="menu_action_api_bank_form" groups="base.group_system"
+			parent="account.menu_finance_configuration" sequence="10"/>
+
+</odoo>

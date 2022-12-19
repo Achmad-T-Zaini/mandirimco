@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <report 
+            id="action_jadwal_angsuran" 
+            model="simpin.pinjaman" 
+            string="Jadwal Angsuran"
+            report_type="qweb-pdf"
+            name="simpin.jadwal_angsuran" 
+            file="simpin.jadwal_angsuran"
+            print_report_name="'Jadwal Angsuran %s' % object.product_id.name"
+        />
+
+
+<template id="jadwal_angsuran">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+		<br/>
+                    <h2 style="text-align: center;"><strong>Jadwal Angsuran</strong></h2>
+                    <h2 style="text-align: center;"><strong><span t-field="o.product_id.name"/></strong></h2>
+		<br/>
+		<br/>
+	
+                    <table class="table table-condensed table-bordered" >
+                        <tr style="border: none; font-size: 12px;">
+                            <td width="20%"><strong>N a m a</strong></td>
+                            <td width="30%"><span t-field="o.member_id.name"/></td>
+                            <td width="20%"></td>
+                            <td width="30%"></td>
+                        </tr>
+                        <tr style="border: none; font-size: 12px;">
+                            <td width="20%"><strong>N I K</strong></td>
+                            <td width="30%"><span t-field="o.member_id.nomor_induk"/></td>
+                            <td width="20%"></td>
+                            <td width="30%"></td>
+                        </tr>
+                        <tr style="border: none; font-size: 12px;">
+                            <td width="20%"><strong>PLAFOND PEMBIAYAAN</strong></td>
+                            <td width="30%"><span t-field="o.nilai_pinjaman"/></td>
+                            <td width="20%"><strong>TANGGAL AKAD</strong></td>
+                            <td width="30%"><span t-field="o.tanggal_akad"/></td>
+                        </tr>
+                        <tr style="border: none; font-size: 12px;">
+                            <td width="20%"><strong>SUKU BUNGA</strong></td>
+                            <td width="30%"><span t-field="o.interest"/></td>
+                            <td width="20%"><strong>FLAT / TAHUN</strong></td>
+                            <td width="30%"><span t-esc="'{:,.2f}'.format(o.interest / 1.77)"/></td>
+                        </tr>
+                        <tr style="border: none; font-size: 12px;">
+                            <td width="20%"><strong>JANGKA WAKTU</strong></td>
+                            <td width="30%"><span t-field="o.periode_angsuran"/></td>
+                            <td width="20%"><strong>EFF / TAHUN</strong></td>
+                            <td width="30%"><span t-esc="'{:,.2f}'.format(o.interest / 12)"/></td>
+                        </tr>
+                        <tr style="border: none; font-size: 12px;">
+                            <td width="20%"><strong>ANGSURAN PER BULAN</strong></td>
+                            <td width="30%"><span t-field="o.angsuran"/></td>
+                            <td width="20%"></td>
+                            <td width="30%"></td>
+                        </tr>
+                    </table>
+		<br/>
+                    <!-- get_data_simulasi QUERY -->
+		    <t t-set = "data_angsuran" t-value = "o.get_data_angsuran()" />
+                    <!-- Display each lines -->
+                    <table class="table table-condensed table-bordered">
+                        <tr style="border: none; font-size: 11px;">
+                            <td width="5%" style="text-align: center;"><strong>No</strong></td>
+                            <td width="15%" style="text-align: center;"><strong>Periode</strong></td>
+                            <td width="20%" style="text-align: center;"><strong>Pokok Pinjaman</strong></td>
+                            <td width="20%" style="text-align: center;"><strong>Angsuran Pokok</strong></td>
+                            <td width="20%" style="text-align: center;"><strong>Jasa</strong></td>
+                            <td width="20%" style="text-align: center;"><strong>Angsuran</strong></td>
+                        </tr>
+	             	<t t-foreach="data_angsuran" t-as="line">
+                        	<tr style="border: none; font-size: 11px;">
+                        	    <td width="5%" style="text-align: center;"><span t-esc="line['no']"/></td>
+                        	    <td width="15%" style="text-align: right;"><span t-esc="line['periode']" /></td>
+                        	    <td width="20%" style="text-align: right;"><span t-esc="round(line['pokok_pinjaman'],0)" t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                        	    <td width="20%" style="text-align: right;"><span t-esc="round(line['angsuran_pokok'],0)" t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                        	    <td width="20%" style="text-align: right;"><span t-esc="round(line['angsuran_margin'],0)" t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                        	    <td width="20%" style="text-align: right;"><span t-esc="round(line['angsuran_bulanan'],0)" t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+	                        </tr>
+			</t>
+                    </table>
+    
+    
+    
+    
+		<br/>
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+</odoo>

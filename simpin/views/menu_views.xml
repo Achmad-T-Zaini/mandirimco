@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+    <menuitem id="simpin_menu" web_icon="simpin,static/src/img/icon.png"
+		name="SimPin" groups="simpin.group_simpin_user" sequence="40"/>
+   	<menuitem id="simpin_member_menu" parent="simpin_menu" 
+		name="Anggota" sequence='1' groups="simpin.group_simpin_user"/>
+   	<menuitem id="simpin_layanan_menu" parent="simpin_menu" 
+		name="Layanan" sequence='2' groups="simpin.group_simpin_user"/>
+   	<menuitem id="simpin_config_menu" parent="simpin_menu" 
+		name="Konfigurasi" sequence='5' groups="simpin.group_simpin_user"/>
+
+	</data>
+</odoo>
+

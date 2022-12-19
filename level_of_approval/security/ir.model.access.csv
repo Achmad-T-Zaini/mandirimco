@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_loa_user,loa.user,model_level_of_approval,level_of_approval.group_loa_user,1,1,0,0
+access_loa_officer,loa.officer,model_level_of_approval,level_of_approval.group_loa_officer,1,1,1,0
+access_loa_manager,loa.manager,model_level_of_approval,level_of_approval.group_loa_manager,1,1,1,1
+access_loa_line_user,loa.line.user,model_level_of_approval_line,level_of_approval.group_loa_user,1,1,0,0
+access_loa_line_officer,loa.line.officer,model_level_of_approval_line,level_of_approval.group_loa_officer,1,1,1,0
+access_loa_line_manager,loa.line.manager,model_level_of_approval_line,level_of_approval.group_loa_manager,1,1,1,1

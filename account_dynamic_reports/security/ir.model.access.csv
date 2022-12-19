@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ins_account_financial_report,ins.account.financial.report,model_ins_account_financial_report,account.group_account_user,1,1,1,0
+access_ins_account_financial_report_manager,ins.account.financial.report.fat,model_ins_account_financial_report,account.group_account_manager,1,1,1,1
+access_ins_account_financial_report_summary,ins.account.financial.report.summary,model_ins_financial_report_summary_lines,account.group_account_user,1,1,1,1

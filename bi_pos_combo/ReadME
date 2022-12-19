@@ -1,0 +1,60 @@
+Date 28th April 2021
+version :- 14.0.0.1
+issue solve:-
+	-- Now we can select optional products from the popup and we can add it in the orderline with it's price.
+
+Date 03rd May 2021
+version :- 14.0.0.2
+issue solve:-
+	-- Load optional and required product image in the popup.
+
+version :- 14.0.0.3 (Date: 02/08/2021)
+issue solve:- 
+	-- Update _create_move_from_pos_order_lines method.
+	-- While adding combo product in the picking it is add main product twice solved that issue.
+
+version :- 14.0.0.4 (Date: 12/08/2021)
+issue solve:- 
+	-- Added constrains if required product not set in the combo products
+
+
+version :- 14.0.1.4 (Date: 13/08/2021)
+Added Improvement:- 
+	-- Removed constrains if required product not set in the combo products.
+	-- Added Selection field for the selection of combo price
+		- total of all the combo product
+		- total of main product.
+
+version :- 14.0.1.5 (Date: 17/08/2021)
+issue solve:-
+		-- While changing customer f combo product is in the cart then show warning popup.
+		-- while changing quantity of combo product main product price taken solved it.
+		-- if changed quantity of combo product then update quantity of sub-produts.
+		-- if set discount/qty/price for the combo product then show it in the receipt.
+
+version :- 14.0.1.6 (Date: 18/08/2021)
+issue solve:-	
+		-- update code of extend OrderReceipt screen view.
+
+--------------------------------------------------------------------------------
+
+Date:- 20th dec, 2021
+"version" : "14.0.1.7",
+issue solve:-
+            (Enterprice 14.0)
+            In combo product added in orderLine ,combo product print in order receipt,
+            like all products name show in the order change receipt in thermal print receipt.
+
+
+Date:-7th jan 2022
+"version" : "14.0.1.8"
+"Improvment Points:-"
+            - update OrderLine for add in optional product for old product is
+                auto selected in every time edit in combo product
+
+Date:-11th jan 2022
+"version" : "14.0.1.9"
+"Improvment Points:-"
+            (Enterprice 14.0)
+            - In Pos Resturant click the order button showing the traceback of display_name, solve the issue.
+

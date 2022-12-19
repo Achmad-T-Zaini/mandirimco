@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <!-- Views Hr Expense Sheet-->
+        <record id="view_hr_expense_sheet_form" model="ir.ui.view">
+            <field name="name">hr.expense.sheet.form.loa</field>
+            <field name="model">hr.expense.sheet</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+            <field name="arch" type="xml">
+                <button name="approve_expense_sheets" position="replace" >
+                    <button name="button_approved" string="Approve" type="object" class="oe_highlight" 
+                    groups="hr_expense.group_hr_expense_user" 
+                    attrs="{'invisible': ['|',('loa_a1','=',True),'|',('state','!=','submit'),('is_approver','=', False)]}"/>
+                    <button name="button_approved" string="Final Approve" type="object" class="oe_highlight" 
+                    groups="hr_expense.group_hr_expense_manager" 
+                    attrs="{'invisible': ['|',('approver2','=', False),'|',('loa_a2','=',True),'|',('state','!=','submit'),('is_final_approver','=', False)]}"/>
+                </button>
+
+                <field name="employee_id" position="before" >
+                    <field name="loa_type" string="Expense Type" widget="selection" 
+                            attrs="{'readonly': [('state','!=', 'draft')]}"
+                    />
+                </field>
+                <field name="user_id" position="replace" >
+                    <field name="user_id" invisible='1' domain="[('share', '=', False)]" widget="many2one_avatar_user"/>
+                    <label for="approver1"/>
+			            <div>
+                            <field name="loa_a1" readonly="1" force_save="1"/>
+                        	<field name="approver1" readonly="1" force_save="1"/>
+			            </div>
+                    <field name="is_approver" invisible="1"/>
+                    <label for="approver2" string="Final Approver"  attrs="{'invisible': [('approver2','=', False)]}" />
+			            <div>
+                            <field name="loa_a2" readonly="1" force_save="1"  attrs="{'invisible': [('approver2','=', False)]}"/>
+                            <field name="approver2" readonly="1" force_save="1" attrs="{'invisible': [('approver2','=', False)]}" />
+			            </div>
+                    <field name="is_final_approver" invisible="1" />
+                </field>
+
+            </field>
+        </record>
+
+	</data>
+</odoo>
+

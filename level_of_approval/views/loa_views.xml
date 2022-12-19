@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <!-- Views -->
+        <record id="loa_tree_view" model="ir.ui.view">
+            <field name="name">level_of_approval.tree</field>
+            <field name="model">level_of_approval</field>
+            <field name="arch" type="xml">
+                <tree string="Level of Approval Tree">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="journal_id"/>
+                    <field name="note"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="loa_form_view" model="ir.ui.view">
+            <field name="name">level_of_approval.form</field>
+            <field name="model">level_of_approval</field>
+            <field name="arch" type="xml">
+                <form string="Level of Approval Form">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" style="width:60%%" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="type"/>
+                                <field name="note"/>
+                            </group>
+                            <group  attrs="{'invisible': [('type', 'not in', ('pettycash','cash_advance'))]}" >
+                                <field name="journal_id" options="{'no_create_edit': True, 'no_quick_create': True}" attrs="{'required': [('type', 'in', ('pettycash','cash_advance'))]}"/>
+                                <field name="debit_account_id" options="{'no_create_edit': True, 'no_quick_create': True}" attrs="{'required': [('type', 'in', ('pettycash','cash_advance'))]}"/>
+                                <field name="credit_account_id" options="{'no_create_edit': True, 'no_quick_create': True}" attrs="{'required': [('type', 'in', ('pettycash','cash_advance'))]}"/>
+                            </group>
+                        </group>
+                    <notebook>
+                        <page string="LOA Lines">
+                            <field name="loa_line" widget="one2many_list" context="{'loa_line': loa_line}">
+                                <tree editable="bottom" string="LOA Lines"  >
+				                    <field name="name" invisible="1"/>
+                                    <field name="from_amount" />
+                                    <field name="amount" />
+                                    <field name="requestor" />
+                                    <field name="appr1" />
+                                    <field name="appr2" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_level_of_approval" model="ir.actions.act_window">
+            <field name="name">Level of Approval</field>
+            <field name="res_model">level_of_approval</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create Level of Approval</p>
+            </field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_action_loa_form_view" action="action_level_of_approval"
+                   groups="level_of_approval.group_loa_user" parent="account.menu_finance_configuration" sequence="9"/>
+
+        <!-- hr.job -->
+        <record id="view_hr_job_level_form" model="ir.ui.view">
+            <field name="name">hr.job.form</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook" position="before">
+                    <group>
+                        <group>
+                       	    <field name="job_level" required="1"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</odoo>
+
