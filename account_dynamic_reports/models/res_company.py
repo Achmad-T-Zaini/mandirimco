@@ -30,6 +30,7 @@ class ResCompany(models.Model):
         ('july_june','1 july to 30 June'),
         ('january_december','1 Jan to 31 Dec')
         ], string='Financial Year', default='january_december', required=True)
+    current_year_earning_account = fields.Many2one('account.account', string='Current Year Earning Account', required=True)
 
 
 class ResCurrency(models.Model):

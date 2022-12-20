@@ -700,7 +700,7 @@ class InsFinancialReport(models.TransientModel):
 
             data_c = data.copy()
             data_cmp = self.get_cmp_report_values(data_c,False)
-
+            data_cye = self.get_current_year_earning_values(data,False)
             self.enable_filter = True
             self.date_from = date_from
             self.date_to = date_to
@@ -811,6 +811,28 @@ class InsFinancialReport(models.TransientModel):
         ) = self.get_account_lines(data.get("form"), enable_budget_month, enable_budget_year)
         company_id = self.env.user.company_id
         data["currency"] = company_id.currency_id.id
+        data["report_lines"] = report_lines
+        data["initial_balance"] = initial_balance or 0.0
+        data["current_balance"] = current_balance or 0.0
+        data["ending_balance"] = ending_balance or 0.0
+        return data
+
+    def get_current_year_earning_values(self,data,enable_budget_month,enable_budget_year=False):
+        company_id = self.env.user.company_id
+        used_context = data["form"]["used_context"]
+        used_context["date_from"] = company_id.fiscalyear_lockdate + relativedelta(days=1) or False
+        used_context["date_to"] = self.date_from + relativedelta(days=-1) or False
+        data["form"]["used_context"] = used_context
+        (
+            report_lines,
+            initial_balance,
+            current_balance,
+            ending_balance,
+        ) = self.get_account_lines(data.get("form"), enable_budget_month, enable_budget_year)
+        data["currency"] = company_id.currency_id.id
+
+        raise UserError(_('data cye %s')%(rec,))
+
         data["report_lines"] = report_lines
         data["initial_balance"] = initial_balance or 0.0
         data["current_balance"] = current_balance or 0.0
