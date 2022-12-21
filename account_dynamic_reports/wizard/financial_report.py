@@ -226,7 +226,7 @@ class InsFinancialReport(models.TransientModel):
                 res[row["id"]] = row
         return res
 
-    def _compute_report_balance(self, reports, enable_budget_month, enable_budget_year = False):
+    def _compute_report_balance(self, reports, enable_budget_month, enable_budget_year,data_cye=False):
         """returns a dictionary with key=the ID of a record and value=the credit, debit and balance amount
         computed for this record. If the record is of type :
             'accounts' : it's the sum of the linked accounts
@@ -245,6 +245,8 @@ class InsFinancialReport(models.TransientModel):
                 if self.account_report_id != self.env.ref(
                     "account_dynamic_reports.ins_account_financial_report_cash_flow0"
                 ):
+#                    if data_cye != False:
+#                        raise UserError(_('cye %s')%(data_cye))
                     res[report.id]["account"] = self._compute_account_balance(
                         report.account_ids, enable_budget_month, enable_budget_year
                     )
@@ -334,7 +336,7 @@ class InsFinancialReport(models.TransientModel):
                             res[report.id][field] += values.get(field)
         return res
 
-    def get_account_lines(self, data, enable_budget_month, enable_budget_year = False):
+    def get_account_lines(self, data, enable_budget_month, enable_budget_year, data_cye):
         lines = []
         initial_balance = 0.0
         current_balance = 0.0
@@ -343,7 +345,7 @@ class InsFinancialReport(models.TransientModel):
         child_reports = account_report._get_children_by_order()
 
         res = self.with_context(data.get("used_context"))._compute_report_balance(
-            child_reports, enable_budget_month, enable_budget_year
+            child_reports, enable_budget_month, enable_budget_year,data
         )
 
         cashflow_context = data.get("used_context")
@@ -502,7 +504,12 @@ class InsFinancialReport(models.TransientModel):
                     vals["balance_init"] = value["init_bal"] * int(report.sign)
                     if not currency_id.is_zero(vals["balance_init"]):
                         flag = True
-                    if flag:
+
+                    if vals["account"]==self.env.user.company_id.current_year_earning_account.id:
+                        data_bs = data.copy()
+#                        data_cye = self.get_current_year_earning_values(data_bs,False)
+
+                    if flag or vals["account"]==self.env.user.company_id.current_year_earning_account.id:
                         sub_lines.append(vals)
                 lines += sorted(sub_lines, key=lambda sub_line: sub_line["name"])
 #                raise UserError(_('lines %s')%(lines,))
@@ -544,19 +551,6 @@ class InsFinancialReport(models.TransientModel):
                 
 #                raise UserError(_('lines %s\ninit %s\ncurr %s\nend %s')%(lines, initial_balance, current_balance, ending_balance,))
         return lines, initial_balance, current_balance, ending_balance
-
-    def get_akumulasi(self,report,data,lines):
-        balance = debit = credit = balance_init = 0.0
-        child_reps = self.env['ins.account.financial.report'].search([('type','=','sum'),('id','child_of',report.id)])
-        for rep in child_reps:
-            ch_reps = self.env['ins.account.financial.report'].search([('type','=','sum'),('id','child_of',rep.id)])
-            if ch_reps:
-                for ch in ch_reps:
-                    balance_init += self.get_akumulasi(ch,data,lines)                
-            c_line = list(filter(lambda l: l['name'] == rep.name, lines))
-            if rep.name==c_line[0]['name']:
-                balance_init += c_line[0]['balance_init'] 
-        return balance_init
 
     def get_report_values(self,jenis=False):
         self.ensure_one()
@@ -700,7 +694,6 @@ class InsFinancialReport(models.TransientModel):
 
             data_c = data.copy()
             data_cmp = self.get_cmp_report_values(data_c,False)
-            data_cye = self.get_current_year_earning_values(data,False)
             self.enable_filter = True
             self.date_from = date_from
             self.date_to = date_to
@@ -723,7 +716,7 @@ class InsFinancialReport(models.TransientModel):
             initial_balance,
             current_balance,
             ending_balance,
-        ) = self.get_account_lines(data.get("form"),False)
+        ) = self.get_account_lines(data.get("form"),False,False,False)
         company_id = self.env.user.company_id
         data["currency"] = company_id.currency_id.id
         data["report_lines"] = report_lines
@@ -799,6 +792,11 @@ class InsFinancialReport(models.TransientModel):
                     rec['balance_prev'] = cdata['balance'] * report_sign
                     rec['balance_init_prev'] = cdata['balance_init'] * report_sign
 
+#        data_bs = data.copy()
+#        data_cye = self.get_current_year_earning_values(data_bs,False)
+#        data["form"]["current_year"] = data_cye
+
+
 #        lines = data["report_lines"].sort(key=lambda k: k['sequence'])
         return data
 
@@ -808,7 +806,7 @@ class InsFinancialReport(models.TransientModel):
             initial_balance,
             current_balance,
             ending_balance,
-        ) = self.get_account_lines(data.get("form"), enable_budget_month, enable_budget_year)
+        ) = self.get_account_lines(data.get("form"), enable_budget_month, enable_budget_year,False)
         company_id = self.env.user.company_id
         data["currency"] = company_id.currency_id.id
         data["report_lines"] = report_lines
@@ -819,25 +817,23 @@ class InsFinancialReport(models.TransientModel):
 
     def get_current_year_earning_values(self,data,enable_budget_month,enable_budget_year=False):
         company_id = self.env.user.company_id
-        used_context = data["form"]["used_context"]
-        used_context["date_from"] = company_id.fiscalyear_lockdate + relativedelta(days=1) or False
+        used_context = data["used_context"]
+        used_context["date_from"] = company_id.fiscalyear_lock_date + relativedelta(days=1) or False
         used_context["date_to"] = self.date_from + relativedelta(days=-1) or False
-        data["form"]["used_context"] = used_context
+        data["used_context"] = used_context
+        res = False
         (
             report_lines,
             initial_balance,
             current_balance,
             ending_balance,
-        ) = self.get_account_lines(data.get("form"), enable_budget_month, enable_budget_year)
-        data["currency"] = company_id.currency_id.id
+        ) = self.get_account_lines(data, enable_budget_month, enable_budget_year,False)
+        for rec in report_lines:
+            if rec['type']=='report' and rec["account_type"]=="account_report":
+                res = rec
+                break
 
-        raise UserError(_('data cye %s')%(rec,))
-
-        data["report_lines"] = report_lines
-        data["initial_balance"] = initial_balance or 0.0
-        data["current_balance"] = current_balance or 0.0
-        data["ending_balance"] = ending_balance or 0.0
-        return data
+        return res
 
     @api.model
     def _get_default_report_id(self):
