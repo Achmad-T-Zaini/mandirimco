@@ -792,14 +792,25 @@ class InsFinancialReport(models.TransientModel):
                     rec['balance_prev'] = cdata['balance'] * report_sign
                     rec['balance_init_prev'] = cdata['balance_init'] * report_sign
 
-#        data_bs = data.copy()
-#        data_cye = self.get_current_year_earning_values(data_bs,False)
-#        data["form"]["current_year"] = data_cye
-
+        data_bs = data.copy()
+        data_cye = self.get_current_year_earning_values(data_bs,False)
+        cye = False
+        for rec in data["report_lines"]:
+            if rec['name'] == self.env.user.company_id.current_year_earning_account.name:
+                rec["balance_init"] = data_cye["balance"]
+                rec["balance"] = data_cye["balance"]
+                parent_rep = self.env['ins.account.financial.report'].search([('id','=',rec["parent"])])
+                while parent_rep:
+                    c_line = list(filter(lambda l: l['name'] == parent_rep.name, data["report_lines"]))
+                    if len(c_line)>0:
+                        c_line[0]['balance_init'] += data_cye["balance"] 
+                        c_line[0]['balance'] += data_cye["balance"]
+                        parent_rep = self.env['ins.account.financial.report'].search([('id','=',parent_rep.parent_id.id)])
+#                        raise UserError(_('c_line %s == %s')%(parent_rep,c_line,))
 
 #        lines = data["report_lines"].sort(key=lambda k: k['sequence'])
         return data
-
+    
     def get_cmp_report_values(self,data,enable_budget_month,enable_budget_year=False):
         (
             report_lines,
@@ -817,17 +828,17 @@ class InsFinancialReport(models.TransientModel):
 
     def get_current_year_earning_values(self,data,enable_budget_month,enable_budget_year=False):
         company_id = self.env.user.company_id
-        used_context = data["used_context"]
-        used_context["date_from"] = company_id.fiscalyear_lock_date + relativedelta(days=1) or False
-        used_context["date_to"] = self.date_from + relativedelta(days=-1) or False
-        data["used_context"] = used_context
+#        used_context = data["form"]["used_context"]
+        data["form"]["used_context"]["date_from"] = company_id.fiscalyear_lock_date + relativedelta(days=1) or False
+        data["form"]["used_context"]["date_to"] = self.date_from + relativedelta(days=-1) or False
+#        data["form"]["used_context"] = used_context
         res = False
         (
             report_lines,
             initial_balance,
             current_balance,
             ending_balance,
-        ) = self.get_account_lines(data, enable_budget_month, enable_budget_year,False)
+        ) = self.get_account_lines(data.get("form"), False, False,False)
         for rec in report_lines:
             if rec['type']=='report' and rec["account_type"]=="account_report":
                 res = rec
